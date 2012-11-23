@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Page = "Home";
+    var ProfilePicture = Model.Avatar ?? "/Content/Images/DefaultProfilePicture.png";
+    string listName = String.Equals(ViewBag.List, "Followers") || String.Equals(ViewBag.List, "Following") ? "UsersList" : ViewBag.List;
+}
+@using TwitterClone.Helpers
+@model TwitterClone.Entities.User
+@Html.UserStyle();
+<div id="page-container" class="wrapper wrapper-profile white" data-page="profile" data-user-name="@Model.Username">
+    <div class="module profile-card component" data-component-term="profile_follow_card">
+        <div class="profile-header-inner flex-module clearfix ">
+
+
+            <a href="/settings/profile" class="profile-picture" target="_blank" title="Add an avatar" data-placement="right">
+                <img src="@ProfilePicture" alt="@Model.FullName" class="avatar size128">
+            </a>
+
+            <div class="profile-card-inner">
+                <h1 class="fullname">
+                    @Model.FullName
+                </h1>
+                <h2 class="username">
+                    <span class="screen-name">@@@Model.Username</span>
+                </h2>
+                <p class="bio ">@Model.Bio</p>
+                <p class="location-and-url">
+                    <span class="location">@Model.Location</span>
+                    <span class="url"><a target="_blank" rel="me nofollow" href="@Model.WebsiteURL">@Model.Website</a></span>
+                </p>
+            </div>
+
+            <div class="profile-card-actions">
+                <a class="btn edit-profile-btn js-nav" href="/settings/profile">Edit your profile</a>
+                <ul class="stats js-mini-profile-stats">
+                    <li><a class="js-nav" href="/@Model.Username" data-element-term="tweet_stats" data-nav="profile">
+                        <strong>@Model.Tweets.Count</strong> Tweets
+                    </a></li>
+                    <li><a class="js-nav" href="/following" data-element-term="following_stats" data-nav="following">
+                        <strong>@Model.Following.Count</strong> Following
+                    </a></li>
+                    <li><a class="js-nav" href="/followers" data-element-term="follower_stats" data-nav="followers">
+                        <strong>@Model.Followers.Count</strong> Followers
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+<div class="dashboard">
+    @Html.Partial("profile-nav")
+    <div class="component" data-component-term="similar_user_recommendations" data-bind="visible: suggestions().length > 0">
+            <div class="module profile-nav wtf-module js-similar-to-module  has-content">
+
+                <ul>
+                    <li class="js-sidenav-link " data-name="similarTo">
+                        <a class="list-link" href="/similar_to/@Model.Username">Similar to you<i class="chev-right"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="flex-module">
+                    <div class="js-recommended-followers dashboard-user-recommendations flex-module-inner" data-section-id="wtf" style="opacity: 1;" data-bind="foreach: suggestions">
+                        <div class="js-account-summary account-summary js-actionable-user account-summary-small" data-user-id="29840295" data-feedback-token="106">
+                            <div class="content">
+                                <a class="account-group js-recommend-link js-user-profile-link user-thumb" data-bind="attr: {'href': Url}" href="/">
+
+                                    <img class="avatar js-action-profile-avatar size32" data-bind="attr: {'alt': FullName, 'src': Avatar}">
+                                    <span class="account-group-inner js-action-profile-name" data-user-id="29840295">
+                                        <b class="fullname" data-bind="text: FullName"></b>
+                                        <span>‏</span>
+                                        <i class="verified"></i>
+                                        <span class="username"><small>@@</small><span class="js-username" data-bind="text: UserName"></span></span>
+                                    </span>
+                                </a>
+                                <small class="metadata social-context"></small>
+                                <span class="user-actions " data-bind="css: {'not-following': true}, click: $parent.follow">
+                                    <a href="#" class="follow-link">
+                                        <span class="link-text follow-text">Follow</span>
+                                        <span class="link-text unfollow-text">Unfollow</span>
+                                        <span class="link-text cancel-text">Cancel</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="module site-footer ">
+            <div class="flex-module">
+                <div class="flex-module-inner js-items-container">
+                    <ul class="clearfix">
+                        <li class="copyright">© 2012 Twitter</li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="//support.twitter.com">Help</a></li>
+                        <li><a href="/tos">Terms</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="http://blog.twitter.com">Blog</a></li>
+                        <li><a href="http://status.twitter.com">Status</a></li>
+                        <li><a href="/download">Apps</a></li>
+                        <li><a href="/about/resources">Resources</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                        <li><a href="//business.twitter.com/en/advertise/start">Advertisers</a></li>
+                        <li><a href="//business.twitter.com/index_en.html">Businesses</a></li>
+                        <li><a href="http://media.twitter.com">Media</a></li>
+                        <li><a href="//dev.twitter.com">Developers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial(listName)
+</div>
+
+
+<div class="hidden-replies-container"></div>
+<div class="stream-autoplay-marker">
+    <i class="arrow"></i>
+    <span class="text"></span>
+</div>
+<div id="sensitive_flag_dialog" class="modal-container">
+    <div class="close-modal-background-target"></div>
+    <div class="modal modal-small draggable">
+        <div class="modal-content">
+            <button class="modal-btn modal-close"><i class="close-medium"><span class="hidden-elements">Close</span></i></button>
+            <div class="modal-header">
+                <h3 class="modal-title">Flag this media</h3>
+            </div>
+            <div class="modal-body">
+                <p class="sensitive-title">This has already been marked as containing sensitive content.</p>
+
+                <label class="checkbox" for="sensitive-settings-checkbox">
+                    <input type="checkbox" id="sensitive-settings-checkbox" value="settings">
+                    Change my settings to warn me before displaying media that may contain sensitive content.
+                </label>
+                <label class="checkbox" for="sensitive-illegal-checkbox">
+                    <input type="checkbox" id="sensitive-illegal-checkbox" value="illegal">
+                    Flag this as containing illegal content.
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button id="submit_flag_confirmation" type="button" class="btn">Submit</button>
+                <button id="cancel_flag_confirmation" type="button" class="btn primary-btn">Cancel</button>
+
+                <div class="sensitive-confirmation">
+                    <a class="sensitive-learn-more" target="_blank" href="//support.twitter.com/articles/20069937">Learn more about flagging media</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay"></div>
+</div>

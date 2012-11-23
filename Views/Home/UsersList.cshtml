@@ -1,0 +1,102 @@
+﻿@{
+    var listName = ViewContext.RouteData.GetRequiredString("action");
+    
+}
+@model TwitterClone.Entities.User
+<div class="content-main" id="timeline">
+    <div class="content-header">
+        <div class="header-inner">
+            <h2 class="js-timeline-title">@listName
+            </h2>
+        </div>
+    </div>
+    <div class="stream-container " data-cursor="">
+        <div class="stream profile-stream">
+            <div class="stream-items" id="stream-items-id">
+                @foreach(var user in String.Equals(listName, "Followers") ? Model.Followers: Model.Following) { 
+                <div class="js-stream-item stream-item stream-item">
+                    <div class="account  js-actionable-user js-profile-popup-actionable ">
+                        <div class="user-actions btn-group not-following can-dm ">
+                            <span class="user-dropdown js-link btn">
+                                <i class="account-arrow"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-caret">
+                                        <span class="caret-outer"></span>
+                                        <span class="caret-inner"></span>
+                                    </li>
+                                    <li class="mention-text pretty-link dropdown-link not-blocked">Tweet to <small>@@</small>@user.Username</li>
+                                    <li class="dm-text dropdown-link">Send a Direct Message</li>
+                                    <li class="list-text pretty-link dropdown-link not-blocked">Add or remove from lists…</li>
+                                    <li class="dropdown-divider not-blocked"></li>
+                                    <li class="block-text pretty-link dropdown-link not-blocked">Block <small>@@</small>@user.Username</li>
+                                    <li class="unblock-text pretty-link dropdown-link">Unblock <small>@@</small>@user.Username</li>
+                                    <li class="report-spam-text pretty-link dropdown-link">Report <small>@@</small>@user.Username for spam</li>
+                                    <li class="hide-suggestion-text dropdown-link">Hide this suggestion</li>
+                                    <li class="dropdown-divider is-following"></li>
+                                    <li class="retweet-on-text dropdown-link">Turn on Retweets</li>
+                                    <li class="retweet-off-text dropdown-link">Turn off Retweets</li>
+                                    <li class="device-notifications-on-text dropdown-link">Turn on mobile notifications</li>
+                                    <li class="device-notifications-off-text dropdown-link">Turn off mobile notifications</li>
+                                </ul>
+                            </span>
+
+
+                            <button class="js-follow-btn follow-button btn" type="button">
+                                <span class="button-text follow-text"><i class="follow"></i>Follow</span>
+                                <span class="button-text following-text">Following</span>
+                                <span class="button-text unfollow-text">Unfollow</span>
+                                <span class="button-text blocked-text">Blocked</span>
+                                <span class="button-text unblock-text">Unblock</span>
+                                <span class="button-text pending-text">Pending</span>
+                                <span class="button-text cancel-text">Cancel</span>
+                            </button>
+
+                        </div>
+
+                        <div class="content">
+                            <div class="stream-item-header">
+                                <a class="account-group js-user-profile-link" href="/@user.Username">
+                                    <img class="avatar js-action-profile-avatar " src="@user.GetAvatar("small")" alt="@user.FullName" />
+                                    <strong class="fullname js-action-profile-name">@user.FullName</strong>
+                                    <span>‏</span>
+
+                                    <span class="username js-action-profile-name">@@@user.Username</span>
+                                </a>
+                            </div>
+                            <p class="bio ">
+                               @user.Bio     
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+                }
+
+            </div>
+            <div class="stream-footer ">
+                <div class="timeline-end has-items ">
+                    <div class="stream-end">
+                        <div class="stream-end-inner">
+                            <i class="bird-etched"></i>
+                            <p class="empty-text">You don't have any followers yet.</p>
+                            <p>
+                                <button type="button" class="btn-link back-to-top hidden" style="display: inline-block;">Back to top ↑</button></p>
+                        </div>
+                    </div>
+                    <div class="stream-loading">
+                        <div class="stream-end-inner">
+                            <span class="spinner" title="Loading..."></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hidden-replies-container"></div>
+            <div class="stream-autoplay-marker">
+                <i class="arrow"></i>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+</div>

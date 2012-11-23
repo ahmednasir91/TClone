@@ -1,0 +1,25 @@
+﻿@model dynamic
+
+ <div class="component">
+            <div class="module profile-nav" data-profile-nav="@ViewBag.List">
+                <ul class="js-nav-links">
+                    <li class="">
+                        <a class="list-link js-nav" href="/@Model.Username" data-nav="tweetslist">Tweets<i class="chev-right"></i></a>
+                    </li>
+                    <li class="">
+                        <a class="list-link js-nav" href="/following" data-nav="following">Following<i class="chev-right"></i></a>
+                    </li>
+                    <li class="">
+                        <a class="list-link js-nav" href="/followers" data-nav="followers">Followers<i class="chev-right"></i></a>
+                    </li>
+                    <li class="">
+                        <a class="list-link js-nav" href="/favorites" data-nav="favorites">Favorites<i class="chev-right"></i>
+                        </a>
+                    </li>
+                    <li class="last-item">
+                        <a class="list-link js-nav" href="/@Model.Username/lists" data-nav="all_lists">Lists<i class="chev-right"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
