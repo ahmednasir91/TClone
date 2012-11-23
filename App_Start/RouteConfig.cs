@@ -9,7 +9,7 @@ namespace TwitterClone.App_Start
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute("404", "404", new {controller = "Home", action = "NotFound"});
             routes.MapRoute("following", "following", new {controller = "Home", action = "Following"});
             routes.MapRoute("followers", "followers", new { controller = "Home", action = "Followers" });
 

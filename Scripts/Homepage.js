@@ -111,7 +111,8 @@ var validationModule = function () {
                 tweet.IsFavorite = ko.observable(tweet.IsFavorite);
                 tweet.DateAndTime = helpers.toDate(tweet.DateAndTime);
                 this.tweets.unshift(tweet);
-                count(count() + 1);
+                if (tweet.IsMine)
+                    count(count() + 1);
                 $('[data-element-term="tweet_stats"] strong').text(count());
             },
 

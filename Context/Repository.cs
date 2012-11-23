@@ -78,5 +78,6 @@ namespace TwitterClone.Context
             GetCurrentUser().Following.Add(GetUser(username));
             return datacontext.SaveChanges() > 0;
         }
+
     }
 }

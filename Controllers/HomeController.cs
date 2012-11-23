@@ -6,6 +6,12 @@ namespace TwitterClone.Controllers
     public class HomeController : Controller
     {
         public Repository userRepo = new Repository();
+
+        public ActionResult NotFound()
+        {
+            return Json("Page not found!", JsonRequestBehavior.AllowGet); //Replace with return View("NotFound"); and create a page with a layout using _Layout.cshtml
+        }
+
         public ActionResult Index()
         {
             var model = userRepo.GetUser(User.Identity.Name);
@@ -28,6 +34,9 @@ namespace TwitterClone.Controllers
 
         public ActionResult Show(string username)
         {
+            var user = userRepo.GetUser(username);
+            if (user == null)
+                return Redirect("/404");
             return Json(username, JsonRequestBehavior.AllowGet);
         }
 

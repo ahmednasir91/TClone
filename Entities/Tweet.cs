@@ -30,6 +30,7 @@ namespace TwitterClone.Entities
                             Url = "/" + Sender.Username + "/status/" + Id,
                             UserProfileUrl = "/" + Sender.Username,
                             IsFavorite = IsFavourite && String.Equals(Sender.Username, username, StringComparison.CurrentCultureIgnoreCase) ? "favorited" : "",
+                            IsMine = String.Equals(Sender.Username, username, StringComparison.CurrentCultureIgnoreCase),
                         });
         }
 
