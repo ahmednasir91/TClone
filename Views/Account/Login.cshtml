@@ -1,0 +1,54 @@
+﻿@model TwitterClone.Models.LoginModel
+
+@{
+    ViewBag.Page = "Login";
+    ViewBag.PageClass = "route-login";
+    if (!ViewData.ModelState.IsValid)
+    {
+        ViewBag.AlertMessage = "Wrong Username/Email and password combination.";
+    }
+}
+
+<div id="page-container" class="wrapper wrapper-login white">
+    <div class="page-canvas">
+
+        <div class="signin-wrapper" data-login-message="false">
+            <h1>Sign in to Twitter</h1>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "clearfix signin js-signin" })) { 
+                <fieldset>
+                    <legend></legend>
+                    <div class="clearfix holding">
+                        <span class="username js-username holder">Username or email</span>
+                        @Html.TextBoxFor(m => m.UserName, new {@class = "js-username-field email-input"})
+                        <p class="help-text-inline">Forgot your <a href="@Url.Action("ForgotPassword")" title="If you remember your password, try logging in with your email" tabindex="-1">username</a>?</p>
+                    </div>
+
+                    <div class="clearfix holding">
+                        <span class="password holder">Password</span>
+                        @Html.PasswordFor(m => m.Password, new {@class = "js-password-field"})
+                        <p class="help-text-inline">Forgot your <a href="@Url.Action("ForgotPassword")">password</a>?</p>
+                    </div>
+                </fieldset>
+                <div class="clearfix">
+                    <button type="submit" class="submit btn primary-btn">Sign in</button>
+                    <div class="subchck">
+                        <label class="remember">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            Remember me
+                        </label>
+                    </div>
+
+                </div>
+            }
+        </div>
+
+        <div class="clearfix mobile has-sms">
+            <p class="mobile-helper">
+                Already using Twitter via text message?
+      <a href="#">Activate your account »</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>

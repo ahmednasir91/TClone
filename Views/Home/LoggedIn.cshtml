@@ -1,0 +1,408 @@
+﻿@using TwitterClone.Helpers
+@model TwitterClone.Entities.User
+@{
+    ViewBag.Page = "Home";      
+}
+@Html.UserStyle();
+<div id="page-container" class="wrapper wrapper-home white">
+    <div class="dashboard">
+        <div class="module mini-profile">
+            <div class="flex-module profile-summary js-profile-summary">
+                <a href="/@User.Identity.Name" class="account-summary account-summary-small js-nav" data-nav="profile">
+                    <div class="content">
+                        <div class="account-group js-mini-current-user">
+                            <img class="avatar size32" src="@Model.GetAvatar("small")" alt="Avatar">
+                            <b class="fullname">@Model.FullName </b>
+                            <small class="metadata">View my profile page</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="js-mini-profile-stats-container">
+                <ul class="stats js-mini-profile-stats">
+                    <li><a class="js-nav" href="/@User.Identity.Name" data-element-term="tweet_stats" data-nav="profile">
+
+                            <strong><span data-bind="text: tweetsCount">@Model.Count("Tweets")</span></strong> Tweets
+                    </a></li>
+                    <li><a class="js-nav" href="/following" data-element-term="following_stats" data-nav="following">
+
+                        <strong>@Model.Count("Following")</strong> Following
+                    </a></li>
+                    <li><a class="js-nav" href="/followers" data-element-term="follower_stats" data-nav="followers">
+
+                        <strong>@Model.Count("Followers")</strong> Followers
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="home-tweet-box tweet-box component tweet-user">
+                <form class="tweet-form condensed" method="post" target="tweet-post-iframe">
+                    <div class="tweet-content">
+                        <label class="hidden-elements" for="tweet-box-mini-home-profile">Tweet text</label>
+                        <textarea class="tweet-box" id="tweet-box-mini-home-profile" data-bind="value: message, valueUpdate: 'afterkeydown'" dir="ltr">Compose new Tweet...</textarea>
+                    </div>
+                    <div class="tweet-button">
+                        <span class="spinner"></span>
+                        <span class="tweet-counter" data-bind="text: tweetcount, attr: {'class': warning}"></span>
+                        <button class="btn primary-btn tweet-action" data-bind="disable: tweetcount > 0, attr: {'class': btnclass}" type="button">Tweet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="module wtf-module js-wtf-module " style="display: none;">
+
+            <div class="flex-module">
+
+                <div class="flex-module-header">
+                    <h3>Who to follow</h3>
+                    <small>· <a class="js-refresh-suggestions" href="#">Refresh</a></small>
+                    <small class="view-all">· <a class="js-view-all-link" href="/who_to_follow/suggestions" data-element-term="view_all_link">View all</a></small>
+                </div>
+
+                <div class="js-recommended-followers dashboard-user-recommendations flex-module-inner" data-section-id="wtf">
+                </div>
+
+                <div class="flex-module-footer">
+                    <a href="/who_to_follow/interests" class="js-interests-link" data-element-term="interests_link">Browse categories</a> · <a href="/who_to_follow/import" class="js-find-friends-link" data-element-term="import_link">Find friends</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="module trends">
+            <div class="flex-module trends-inner">
+                <div class="flex-module-header">
+
+                    <h3>
+                        <span class="js-trend-location">Trends
+                        </span>
+                    </h3>
+                    <small>· <a href="#" data-modal="change-trends" class="change-trends js-trend-toggle">Change</a></small>
+                </div>
+                <div class="flex-module-inner">
+                    <ul class="trend-items js-trends">
+                        <li class="js-trend-item  " data-trend-name="#groenlinks">
+                            <a class="js-nav" href="/search?q=%23groenlinks&amp;src=tren" data-query-source="trend_click">#groenlinks</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="#MentionSomeoneWhoCanAlwaysMakeYouSmile">
+                            <a class="js-nav" href="/search?q=%23MentionSomeoneWhoCanAlwaysMakeYouSmile&amp;src=tren" data-query-source="trend_click">#MentionSomeoneWhoCanAlwaysMakeYouSmile</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="#pvda">
+                            <a class="js-nav" href="/search?q=%23pvda&amp;src=tren" data-query-source="trend_click">#pvda</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Den Bosch">
+                            <a class="js-nav" href="/search?q=%22Den+Bosch%22&amp;src=tren" data-query-source="trend_click">Den Bosch</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Twitter">
+                            <a class="js-nav" href="/search?q=Twitter&amp;src=tren" data-query-source="trend_click">Twitter</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Groningen">
+                            <a class="js-nav" href="/search?q=Groningen&amp;src=tren" data-query-source="trend_click">Groningen</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Nog 2">
+                            <a class="js-nav" href="/search?q=%22Nog+2%22&amp;src=tren" data-query-source="trend_click">Nog 2</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Dutch">
+                            <a class="js-nav" href="/search?q=Dutch&amp;src=tren" data-query-source="trend_click">Dutch</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Andorra">
+                            <a class="js-nav" href="/search?q=Andorra&amp;src=tren" data-query-source="trend_click">Andorra</a>
+                        </li>
+                        <li class="js-trend-item  " data-trend-name="Funda">
+                            <a class="js-nav" href="/search?q=Funda&amp;src=tren" data-query-source="trend_click">Funda</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="module site-footer ">
+            <div class="flex-module">
+                <div class="flex-module-inner js-items-container">
+                    <ul class="clearfix">
+                        <li class="copyright">© 2012 Twitter</li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="//support.twitter.com">Help</a></li>
+                        <li><a href="/tos">Terms</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="http://blog.twitter.com">Blog</a></li>
+                        <li><a href="http://status.twitter.com">Status</a></li>
+                        <li><a href="/download">Apps</a></li>
+                        <li><a href="/about/resources">Resources</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                        <li><a href="//business.twitter.com/en/advertise/start">Advertisers</a></li>
+                        <li><a href="//business.twitter.com/index_en.html">Businesses</a></li>
+                        <li><a href="http://media.twitter.com">Media</a></li>
+                        <li><a href="//dev.twitter.com">Developers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="component wtf-module has-content" id="empty-timeline-recommendations" data-bind="visible: suggestions().length > 0">
+        <div class="content-main empty-timeline big-avatar-list breakable">
+            <div class="content-header">
+                <div class="header-inner empty-timeline-header">
+                    <small class="pull-right"><a href="#" class="js-done disabled">Close</a></small>
+                    <h2 class="header-text">Here are some people you might enjoy following.
+                    </h2>
+                    <small>
+                        <a href="#" class="js-refresh-suggestions">Refresh</a> ·
+                        <a href="/who_to_follow/suggestions">View all</a>
+                    </small>
+                </div>
+            </div>
+
+            <div class="empty-timeline-footer content-no-header">
+                <ul class="clearfix js-recommended-followers" style="opacity: 1;" data-bind="foreach: suggestions">
+                    <li class="list-item js-list-item js-actionable-user">
+                        <a class="account-group js-account-group" data-bind="attr: {'href': Url}">
+                            <img height="128" width="128" data-bind="attr: {'src': Avatar, 'alt': FullName}" class="avatar size128 js-action-profile-avatar">
+                            <span class="account-group-inner js-action-profile-name">
+                                <strong class="fullname" data-bind="text: FullName"></strong><i class="verified"></i>
+                                <small class="username">@@<small data-bind="text: UserName"></small></small>
+                            </span>
+                        </a>
+                        <div class="user-actions btn-group " data-bind="css: {'not-following': true}, click: $parent.follow">
+                            <button class="js-follow-btn follow-button btn" type="button">
+                                <span class="button-text follow-text"><i class="follow"></i>Follow</span>
+                                <span class="button-text following-text">Following</span>
+                                <span class="button-text unfollow-text">Unfollow</span>
+                                <span class="button-text blocked-text">Blocked</span>
+                                <span class="button-text unblock-text">Unblock</span>
+                                <span class="button-text pending-text">Pending</span>
+                                <span class="button-text cancel-text">Cancel</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    @Html.Partial("TweetsList")
+
+    
+
+</div>
+<div id="trends_dialog" class="trends-dialog modal-container">
+    <div class="close-modal-background-target"></div>
+    <div class="modal draggable">
+        <div class="modal-content">
+            <button class="modal-btn modal-close"><i class="close-medium"><span class="hidden-elements">Close</span></i></button>
+            <div class="modal-header">
+                <h3 class="modal-title">Trends
+            
+                </h3>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="trends-personalized content-placeholder" style="">
+                    <h2 class="title">Trends tailored just for you.</h2>
+                    <p>Trends offer a unique way to get closer to what you care about. They are tailored for you based on your location and who you follow.</p>
+                    <p class="placeholder-actions">
+                        <button type="button" class="btn customize-by-location">Change</button>
+                        <button type="button" class="btn primary-btn done">Keep tailored Trends</button>
+                    </p>
+                </div>
+                <div class="trends-wrapper" id="trends_dialog_content">
+                    <div class="trends-by-location" style="display: none;">
+
+                        <div class="trends-breadcrumb">
+                            If you want to stop seeing tailored Trends, choose a new location now.
+                        </div>
+
+                        <div class="trends-locations clearfix">
+                            <ul class="trends-locations-list">
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="1">Worldwide
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424747">Argentina
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424748">Australia
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424768">Brazil
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424775">Canada
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424782">Chile
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424787">Colombia
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424800">Dominican Republic
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424801">Ecuador
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424819">France
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424829">Germany
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424834">Guatemala
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="trends-locations-list">
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424848">India
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424846">Indonesia
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424803">Ireland
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424853">Italy
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424856">Japan
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424901">Malaysia
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424900">Mexico
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424909">Netherlands
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424916">New Zealand
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424908">Nigeria
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424922">Pakistan
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424919">Peru
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="trends-locations-list">
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424934">Philippines
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424936">Russia
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424948">Singapore
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424942">South Africa
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424950">Spain
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424954">Sweden
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424969">Turkey
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424738">United Arab Emirates
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424975">United Kingdom
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424977">United States
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="trends-location-item js-trend-link" data-woeid="23424982">Venezuela
+            <i class="checkmark"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer trends-by-location" style="display: none;">
+                <button type="button" class="btn select-personalized">Get tailored Trends</button>
+                <button type="button" class="btn primary-btn done">Done</button>
+            </div>
+        </div>
+    </div>
+</div>

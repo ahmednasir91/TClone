@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TwitterCloneModelStoreContainer" CdmEntityContainer="TwitterCloneEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="TwitterCloneModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lists">
+      <EntityTypeMapping TypeName="TwitterCloneModel.List">
+        <MappingFragment StoreEntitySet="Lists">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ListName" ColumnName="ListName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="TwitterCloneModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tweets">
+      <EntityTypeMapping TypeName="TwitterCloneModel.Tweet">
+        <MappingFragment StoreEntitySet="Tweets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+          <ScalarProperty Name="IsFavourite" ColumnName="IsFavourite" />
+          <ScalarProperty Name="Sender_UserId" ColumnName="Sender_UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TwitterCloneModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+          <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+          <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RoleUsers" TypeName="TwitterCloneModel.RoleUsers" StoreEntitySet="RoleUsers">
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleId" ColumnName="Role_RoleId" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserUsers" TypeName="TwitterCloneModel.UserUsers" StoreEntitySet="UserUsers">
+      <EndProperty Name="Users">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+      <EndProperty Name="Users1">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId1" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

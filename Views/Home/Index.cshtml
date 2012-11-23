@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Page = "Home";   
+}
+<div class="front-card">
+    <div class="front-welcome">
+        <div class="front-welcome-text">
+            <h1>Welcome to Twitter.</h1>
+            <p>Find out what’s happening, right now, with the people and organizations you care about.</p>
+        </div>
+    </div>
+
+
+    <div class="front-signin">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "signin" }))
+        {
+            <div class="placeholding-input username">
+                @Html.TextBox("UserName", "", new { @class = "text-input email-input", @tabindex = 1 })
+                @Html.Label("UserName", "Username or email", new { @class = "placeholder" })
+            </div>
+            <table class="flex-table password-signin">
+                <tbody>
+                    <tr>
+                        <td class="flex-table-primary">
+                            <div class="placeholding-input password flex-table-form">
+                                @Html.Password("Password", "", new { @class = "text-input flex-table-input", @tabindex = 2 })
+                                @Html.Label("Password", new { @class = "placeholder" })
+                            </div>
+
+                        </td>
+                        <td class="flex-table-secondary">
+                            <button type="submit" class="submit btn primary-btn flex-table-btn js-submit" tabindex="0">
+                                Sign in
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="remember-forgot">
+                <label class="remember">
+                    @Html.CheckBox("RememberMe")
+                    <span>Remember me</span>
+                </label>
+                <span class="separator">·</span>
+                <a class="forgot" href="@Url.Action("ForgotPassword", "Account")">Forgot password?</a>
+            </div>
+
+        }
+    </div>
+
+    <div class="front-signup js-front-signup">
+        <h2><strong>New to Twitter?</strong> Sign up</h2>
+        @using (Html.BeginForm("RegisterHome", "Account", FormMethod.Post, new { @class = "signup" }))
+        {
+            <div class="placeholding-input">
+                @Html.TextBox("Name", "", new { @class = "text-input" })
+                @Html.Label("Name", "Full name", new { @class = "placeholder" })
+            </div>
+            <div class="placeholding-input">
+                @Html.TextBox("Email", "", new { @class = "text-input email-input" })
+                @Html.Label("Email", "Email", new { @class = "placeholder" })
+            </div>
+            <div class="placeholding-input">
+                @Html.Password("PasswordFinal", "", new { @class = "text-input" })
+                @Html.Label("PasswordFinal", "Password", new { @class = "placeholder" })
+            </div>
+            <button type="submit" class="btn signup-btn">
+                Sign up for Twitter
+            </button>
+        }
+    </div>
+
+</div>

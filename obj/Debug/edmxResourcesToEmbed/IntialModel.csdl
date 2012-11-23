@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TwitterCloneModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="TwitterCloneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="TwitterCloneModel.C__MigrationHistory" />
+    <EntitySet Name="Lists" EntityType="TwitterCloneModel.List" />
+    <EntitySet Name="Roles" EntityType="TwitterCloneModel.Role" />
+    <EntitySet Name="Tweets" EntityType="TwitterCloneModel.Tweet" />
+    <EntitySet Name="Users" EntityType="TwitterCloneModel.User" />
+    <AssociationSet Name="FK_Lists_Users_UserId" Association="TwitterCloneModel.FK_Lists_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Lists" EntitySet="Lists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tweets_Users_Sender_UserId" Association="TwitterCloneModel.FK_Tweets_Users_Sender_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tweets" EntitySet="Tweets" />
+    </AssociationSet>
+    <AssociationSet Name="RoleUsers" Association="TwitterCloneModel.RoleUsers">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="UserUsers" Association="TwitterCloneModel.UserUsers">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users1" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="List">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="ListName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="TwitterCloneModel.FK_Lists_Users_UserId" FromRole="Lists" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="TwitterCloneModel.RoleUsers" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Tweet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SenderId" Type="Guid" Nullable="false" />
+    <Property Name="IsFavourite" Type="Boolean" Nullable="false" />
+    <Property Name="Sender_UserId" Type="Guid" />
+    <NavigationProperty Name="User" Relationship="TwitterCloneModel.FK_Tweets_Users_Sender_UserId" FromRole="Tweets" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="LastActivityDate" Type="DateTime" Precision="3" />
+    <Property Name="LastLockoutDate" Type="DateTime" Precision="3" />
+    <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Lists" Relationship="TwitterCloneModel.FK_Lists_Users_UserId" FromRole="Users" ToRole="Lists" />
+    <NavigationProperty Name="Tweets" Relationship="TwitterCloneModel.FK_Tweets_Users_Sender_UserId" FromRole="Users" ToRole="Tweets" />
+    <NavigationProperty Name="Roles" Relationship="TwitterCloneModel.RoleUsers" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="Users1" Relationship="TwitterCloneModel.UserUsers" FromRole="Users" ToRole="Users1" />
+    <NavigationProperty Name="Users" Relationship="TwitterCloneModel.UserUsers" FromRole="Users1" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_Lists_Users_UserId">
+    <End Role="Users" Type="TwitterCloneModel.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Lists" Type="TwitterCloneModel.List" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Lists">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tweets_Users_Sender_UserId">
+    <End Role="Users" Type="TwitterCloneModel.User" Multiplicity="0..1" />
+    <End Role="Tweets" Type="TwitterCloneModel.Tweet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Tweets">
+        <PropertyRef Name="Sender_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleUsers">
+    <End Role="Roles" Type="TwitterCloneModel.Role" Multiplicity="*" />
+    <End Role="Users" Type="TwitterCloneModel.User" Multiplicity="*" />
+  </Association>
+  <Association Name="UserUsers">
+    <End Role="Users" Type="TwitterCloneModel.User" Multiplicity="*" />
+    <End Role="Users1" Type="TwitterCloneModel.User" Multiplicity="*" />
+  </Association>
+</Schema>

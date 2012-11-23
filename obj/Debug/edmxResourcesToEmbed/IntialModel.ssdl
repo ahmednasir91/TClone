@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TwitterCloneModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TwitterCloneModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="TwitterCloneModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lists" EntityType="TwitterCloneModel.Store.Lists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="TwitterCloneModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleUsers" EntityType="TwitterCloneModel.Store.RoleUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tweets" EntityType="TwitterCloneModel.Store.Tweets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="TwitterCloneModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserUsers" EntityType="TwitterCloneModel.Store.UserUsers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Lists_Users_UserId" Association="TwitterCloneModel.Store.FK_Lists_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Lists" EntitySet="Lists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUsers_Roles_Role_RoleId" Association="TwitterCloneModel.Store.FK_RoleUsers_Roles_Role_RoleId">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RoleUsers" EntitySet="RoleUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUsers_Users_User_UserId" Association="TwitterCloneModel.Store.FK_RoleUsers_Users_User_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RoleUsers" EntitySet="RoleUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tweets_Users_Sender_UserId" Association="TwitterCloneModel.Store.FK_Tweets_Users_Sender_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tweets" EntitySet="Tweets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserUsers_Users_User_UserId" Association="TwitterCloneModel.Store.FK_UserUsers_Users_User_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserUsers" EntitySet="UserUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserUsers_Users_User_UserId1" Association="TwitterCloneModel.Store.FK_UserUsers_Users_User_UserId1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserUsers" EntitySet="UserUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="Lists">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ListName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="RoleUsers">
+    <Key>
+      <PropertyRef Name="Role_RoleId" />
+      <PropertyRef Name="User_UserId" />
+    </Key>
+    <Property Name="Role_RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="User_UserId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tweets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SenderId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsFavourite" Type="bit" Nullable="false" />
+    <Property Name="Sender_UserId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+    <Property Name="LastPasswordFailureDate" Type="datetime" />
+    <Property Name="LastActivityDate" Type="datetime" />
+    <Property Name="LastLockoutDate" Type="datetime" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="ConfirmationToken" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" />
+    <Property Name="PasswordVerificationToken" Type="nvarchar(max)" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserUsers">
+    <Key>
+      <PropertyRef Name="User_UserId" />
+      <PropertyRef Name="User_UserId1" />
+    </Key>
+    <Property Name="User_UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="User_UserId1" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Lists_Users_UserId">
+    <End Role="Users" Type="TwitterCloneModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Lists" Type="TwitterCloneModel.Store.Lists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Lists">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUsers_Roles_Role_RoleId">
+    <End Role="Roles" Type="TwitterCloneModel.Store.Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoleUsers" Type="TwitterCloneModel.Store.RoleUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="RoleUsers">
+        <PropertyRef Name="Role_RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUsers_Users_User_UserId">
+    <End Role="Users" Type="TwitterCloneModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoleUsers" Type="TwitterCloneModel.Store.RoleUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RoleUsers">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tweets_Users_Sender_UserId">
+    <End Role="Users" Type="TwitterCloneModel.Store.Users" Multiplicity="0..1" />
+    <End Role="Tweets" Type="TwitterCloneModel.Store.Tweets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Tweets">
+        <PropertyRef Name="Sender_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserUsers_Users_User_UserId">
+    <End Role="Users" Type="TwitterCloneModel.Store.Users" Multiplicity="1" />
+    <End Role="UserUsers" Type="TwitterCloneModel.Store.UserUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserUsers">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserUsers_Users_User_UserId1">
+    <End Role="Users" Type="TwitterCloneModel.Store.Users" Multiplicity="1" />
+    <End Role="UserUsers" Type="TwitterCloneModel.Store.UserUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserUsers">
+        <PropertyRef Name="User_UserId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

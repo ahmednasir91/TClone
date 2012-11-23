@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Clone</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="description" content="Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.">
+    <link href="~/Content/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    @Styles.Render("~/Content/css/twitterstyle")
+    @RenderSection("styles", false)
+    @{
+        var loginclass = "logged-out";
+        if (Request.IsAuthenticated)
+        {
+            loginclass = "logged-in";
+            ViewBag.BackgroundImage = ViewBag.BackgroundImage ?? "/Content/themes/bgs/bg.png";
+        }
+    }
+</head>
+<body class="t1 @loginclass" data-background="@ViewBag.BackgroundImage">
+    <div id="doc" class="route-front">
+        <div class="push-loader" id="pushStateSpinner"></div>
+        <div class="topbar js-topbar">
+            <div id="banners" class="js-banners">
+            </div>
+        @Html.Partial("Navbar")
+            </div>
+        <div id="page-outer">
+            <section id="@ViewBag.Page" class="@ViewBag.PageClass">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    <section id="modals-alerts">
+        <div class="alert-messages hidden" id="message-drawer">
+            <div class="message ">
+                <div class="message-inside">
+                    <span class="message-text">@ViewBag.AlertMessage</span><a class="dismiss" href="#">×</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="twttr-dialog-wrapper"></div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    @Scripts.Render("~/bundles/Homepage")
+    
+</body>
+</html>

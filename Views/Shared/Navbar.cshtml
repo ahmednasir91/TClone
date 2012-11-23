@@ -1,0 +1,168 @@
+﻿<div class="global-nav" data-section-term="top_nav">
+    <div class="global-nav-inner">
+        <div class="container">
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="nav js-global-actions" id="global-actions">
+                    <li id="global-nav-home" class="home active" data-global-action="home">
+                        <a class="js-hover js-nav" href="/" data-component-term="home_nav" data-nav="home">
+                            <span class="new-wrapper"><i class="nav-home"></i><i class="nav-new"></i></span>Home
+                        </a>
+                    </li>
+                    <li class="people" data-global-action="connect">
+                        <a class="js-hover js-nav" href="/i/connect" data-component-term="connect_nav" data-nav="connect">
+                            <span class="new-wrapper"><i class="nav-people"></i><i class="nav-new"></i></span>Connect
+                        </a>
+                    </li>
+                    <li class="topics" data-global-action="discover">
+                        <a class="js-hover js-nav" href="/i/discover" data-component-term="discover_nav" data-nav="discover">
+                            <span class="new-wrapper"><i class="nav-topics"></i><i class="nav-new"></i></span>Discover
+                        </a>
+                    </li>
+                    <li class="profile" data-global-action="profile">
+                        <a class="js-hover js-nav" href="/ahmednasir91" data-component-term="profile_nav" data-nav="profile">
+                            <span class="new-wrapper"><i class="nav-me"></i><i class="nav-new"></i></span>Me
+                        </a>
+                    </li>
+                </ul>
+                <i class="bird-topbar-etched"></i>
+                <div class="pull-right">
+                    <div class="well topbar-tweet-btn">
+                        <button id="global-new-tweet-button" type="button" class="btn btn-tweet js-global-new-tweet js-hover js-tooltip" data-placement="bottom" data-component-term="new_tweet_button" title="Compose new Tweet">
+                            <i class="nav-tweet"><span class="hidden-elements">Compose new Tweet</span></i>
+                        </button>
+                    </div>
+                    <i class="topbar-divider"></i>
+
+                    <ul class="nav">
+                        <li class="me dropdown session js-session" data-global-action="t1me" id="user-dropdown">
+                            <a class="dropdown-toggle js-dropdown-toggle js-hover" href="#" id="user-dropdown-toggle">
+                                <span class="new-wrapper"><i class="nav-session"><span class="hidden-elements">Settings and help</span></i><i class="nav-new"></i></span> <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-caret">
+                                    <span class="caret-outer"></span>
+                                    <span class="caret-inner"></span>
+                                </li>
+
+                                <li class="current-user" data-name="profile">
+
+
+                                    <a href="/settings/profile" class="account-summary account-summary-small" data-nav="edit_profile">
+                                        <div class="content">
+                                            <div class="account-group js-mini-current-user" data-user-id="25970540" data-screen-name="ahmednasir91">
+                                                <img class="avatar size32" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_1_normal.png" alt="Ahmed" data-user-id="25970540">
+                                                <b class="fullname">@Model.FullName</b>
+                                                <small class="metadata">Edit profile
+              
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a></li>
+
+                                <li class="dropdown-divider"></li>
+
+                                <li class="messages" data-name="messages">
+                                    <a class="js-dm-dialog" href="/#!/" data-nav="messages">
+                                        <span class="js-direct-message-count count"></span>
+                                        Direct messages
+                                    </a>
+                                </li>
+                                <li data-name="lists"><a href="/ahmednasir91/lists" data-nav="all_lists">Lists</a></li>
+                                <li class="dropdown-divider"></li>
+
+
+                                <li><a href="//support.twitter.com" data-nav="help_center">Help</a></li>
+
+
+                                <li>
+                                    <a href="#" class="js-keyboard-shortcut-trigger" data-nav="shortcuts">Keyboard shortcuts
+                                    </a>
+                                </li>
+
+
+
+
+
+
+
+
+
+                                <li class="dropdown-divider"></li>
+
+
+
+                                <li><a href="/settings/account" data-nav="settings" class="js-nav">Settings</a></li>
+
+
+
+                                <li>
+                                    <a class="js-signout-button" id="signout-button" href="#" data-nav="logout">Sign out</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <i class="topbar-divider"></i>
+                    <form class="form-search js-search-form " action="/search" id="global-nav-search">
+                        <label class="hidden-elements" for="search-query">Search</label>
+                        <input class="search-input" type="text" id="search-query" placeholder="Search" name="q" autocomplete="off" spellcheck="false">
+                        <span class="search-icon js-search-action">
+                            <i class="nav-search" tabindex="0"></i>
+                        </span>
+                        <input disabled="disabled" class="search-input search-hinting-input" type="text" id="search-query-hint" autocomplete="off" spellcheck="false">
+                        <div class="dropdown-menu typeahead">
+                            <div class="dropdown-caret">
+                                <div class="caret-outer"></div>
+                                <div class="caret-inner"></div>
+                            </div>
+                            <div class="dropdown-inner js-typeahead-results">
+                                <ul class="typeahead-items saved-searches-list">
+
+                                    <li class="saved-search-item search-item"><a class="js-nav" href="" data-search-query="" data-query-source="" data-ds="saved_search"><i class="generic-search"></i></a></li>
+                                </ul>
+                                <ul class="typeahead-items topics-list" style="display: none;">
+
+                                    <li class="topics-item search-item"><a class="js-nav" href="" data-search-query="" data-query-source="typeahead_click" data-ds="topics"><i class="generic-search"></i></a></li>
+                                </ul>
+                                <div class="typeahead-accounts js-typeahead-accounts" style="display: none;">
+                                    <ul class="typeahead-items">
+
+                                        <li data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
+
+                                            <a class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
+                                                <img width="24" height="24" class="avatar size24">
+                                                <span class="fullname"></span>
+                                                <i class="verified hidden"></i>
+                                                <span class="username"><s>@@</s><b></b></span>
+                                            </a>
+                                        </li>
+                                        <li class="js-selectable typeahead-accounts-shortcut js-shortcut"><a class="js-nav" href="" data-search-query="" data-query-source="typeahead_click" data-shortcut="true" data-ds="account_search"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+
+                <a id="close-all-button" class="close-all-tweets js-close-all-tweets" href="#" title="Close all open Tweets">
+                    <i class="nav-breaker"></i>
+                </a> 
+            }
+            else {
+                <ul class="nav js-global-actions">
+                    <li class="home" data-global-action="t1home">
+                        <a class="nav-logo-link" href="/" data-nav="front">
+                            <i class="bird-topbar-blue"></i>
+                        </a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
