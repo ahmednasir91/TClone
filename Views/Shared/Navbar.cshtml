@@ -1,10 +1,18 @@
-﻿<div class="global-nav" data-section-term="top_nav">
+﻿@{
+    var isMyProfilePage = "";
+    var isHomePage = String.Equals(ViewContext.RouteData.GetRequiredString("action"), "Index") ? "active" : "";
+    if (Request.IsAuthenticated && String.IsNullOrEmpty(isHomePage))
+    {
+        isMyProfilePage = String.Equals(User.Identity.Name, Model.Username) ? "active" : "";
+    }
+}
+<div class="global-nav" data-section-term="top_nav">
     <div class="global-nav-inner">
         <div class="container">
             @if (Request.IsAuthenticated)
             {
                 <ul class="nav js-global-actions" id="global-actions">
-                    <li id="global-nav-home" class="home active" data-global-action="home">
+                    <li id="global-nav-home" class="home @isHomePage" data-global-action="home">
                         <a class="js-hover js-nav" href="/" data-component-term="home_nav" data-nav="home">
                             <span class="new-wrapper"><i class="nav-home"></i><i class="nav-new"></i></span>Home
                         </a>
@@ -19,8 +27,8 @@
                             <span class="new-wrapper"><i class="nav-topics"></i><i class="nav-new"></i></span>Discover
                         </a>
                     </li>
-                    <li class="profile" data-global-action="profile">
-                        <a class="js-hover js-nav" href="/ahmednasir91" data-component-term="profile_nav" data-nav="profile">
+                    <li class="profile @isMyProfilePage" data-global-action="profile">
+                        <a class="js-hover js-nav" href="/@Model.Username" data-component-term="profile_nav" data-nav="profile">
                             <span class="new-wrapper"><i class="nav-me"></i><i class="nav-new"></i></span>Me
                         </a>
                     </li>
@@ -50,8 +58,8 @@
 
                                     <a href="/settings/profile" class="account-summary account-summary-small" data-nav="edit_profile">
                                         <div class="content">
-                                            <div class="account-group js-mini-current-user" data-user-id="25970540" data-screen-name="ahmednasir91">
-                                                <img class="avatar size32" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_1_normal.png" alt="Ahmed" data-user-id="25970540">
+                                            <div class="account-group js-mini-current-user" >
+                                                <img class="avatar size32" src="@Model.GetAvatar("small")" alt="@Model.FullName" >
                                                 <b class="fullname">@Model.FullName</b>
                                                 <small class="metadata">Edit profile
               

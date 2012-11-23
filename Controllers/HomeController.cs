@@ -34,10 +34,23 @@ namespace TwitterClone.Controllers
 
         public ActionResult Show(string username)
         {
+            ViewBag.List = "TweetsList";
             var user = userRepo.GetUser(username);
             if (user == null)
                 return Redirect("/404");
-            return Json(username, JsonRequestBehavior.AllowGet);
+            return View(user);
+        }
+
+        public ActionResult Following()
+        {
+            ViewBag.List = "Following";
+            return View("Show", userRepo.GetCurrentUser());
+        }
+
+        public ActionResult Followers()
+        {
+            ViewBag.List = "Followers";
+            return View("Show", userRepo.GetCurrentUser());
         }
 
     }

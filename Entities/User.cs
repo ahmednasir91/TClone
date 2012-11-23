@@ -24,6 +24,11 @@ namespace TwitterClone.Entities
         [DataType(DataType.MultilineText)]
         public virtual String Comment { get; set; }
 
+        public virtual String Bio { get; set; }
+        public virtual String Location { get; set; }
+        public virtual String Website { get; set; }
+        public virtual String WebsiteURL { get; set; }
+
         public virtual Boolean IsApproved { get; set; }
         public virtual int PasswordFailuresSinceLastSuccess { get; set; }
         public virtual DateTime? LastPasswordFailureDate { get; set; }

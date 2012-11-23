@@ -183,6 +183,14 @@
     <Compile Include="Migrations\201210101857444_Added Full Name to Users.Designer.cs">
       <DependentUpon>201210101857444_Added Full Name to Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201211231454506_Added Bio field.cs" />
+    <Compile Include="Migrations\201211231454506_Added Bio field.Designer.cs">
+      <DependentUpon>201211231454506_Added Bio field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211231457088_Added location, web fields to User.cs" />
+    <Compile Include="Migrations\201211231457088_Added location, web fields to User.Designer.cs">
+      <DependentUpon>201211231457088_Added location, web fields to User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,6 +314,9 @@
     <Content Include="Views\Home\LoggedIn.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Views\Home\TweetsList.cshtml" />
+    <Content Include="Views\Home\Show.cshtml" />
+    <Content Include="Views\Home\UsersList.cshtml" />
+    <Content Include="Views\Home\profile-nav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

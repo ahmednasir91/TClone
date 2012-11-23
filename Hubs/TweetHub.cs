@@ -28,9 +28,9 @@ namespace TwitterClone.Hubs
             Clients[Context.User.Identity.Name].ShowTweet(tweet.ToJson());
         }
 
-        public void GetAll()
+        public void GetAll(string username = "")
         {
-            foreach (var tweet in repository.GetCurentUserTweets(true))
+            foreach (var tweet in repository.GetCurentUserTweets(String.IsNullOrEmpty(username)))
             {
                 Caller.AddAll(tweet.ToJson(HttpContext.Current.User.Identity.Name));
             }
