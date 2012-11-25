@@ -68,8 +68,6 @@ C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\System.W
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\WebGrease.dll
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\EntityFramework.xml
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\Newtonsoft.Json.xml
-C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\Ninject.pdb
-C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\Ninject.xml
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\SignalR.xml
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\SignalR.Hosting.AspNet.xml
 C:\Documents and Settings\shehroz\Desktop\TwitterClone\TwitterClone\bin\SignalR.Hosting.Common.xml

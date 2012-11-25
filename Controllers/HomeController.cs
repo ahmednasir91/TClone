@@ -9,7 +9,11 @@ namespace TwitterClone.Controllers
 
         public ActionResult NotFound()
         {
-            return Json("Page not found!", JsonRequestBehavior.AllowGet); //Replace with return View("NotFound"); and create a page with a layout using _Layout.cshtml
+
+            return View("NotFound", userRepo.GetCurrentUser());
+            //ViewBag.Message = "Sorry Page not found!";
+           // return View();
+            //Replace with return View("NotFound"); and create a page with a layout using _Layout.cshtml
         }
 
         public ActionResult Index()
