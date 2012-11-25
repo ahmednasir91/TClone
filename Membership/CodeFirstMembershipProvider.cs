@@ -16,11 +16,12 @@ namespace TwitterClone.Membership
         {
             get
             {
-                return this.GetType().Assembly.GetName().Name.ToString();
+                return GetType().Assembly.GetName().Name;
             }
             set
             {
-                this.ApplicationName = this.GetType().Assembly.GetName().Name.ToString();
+                if (value == null) throw new ArgumentNullException("value");
+                ApplicationName = GetType().Assembly.GetName().Name;
             }
         }
 
@@ -90,13 +91,13 @@ namespace TwitterClone.Membership
 
             using (DataContext Context = new DataContext())
             {
-                if (Context.Users.Where(Usr => Usr.Username == username).Any())
+                if (Context.Users.Any(Usr => Usr.Username == username))
                 {
                     status = MembershipCreateStatus.DuplicateUserName;
                     return null;
                 }
 
-                if (Context.Users.Where(Usr => Usr.Email == email).Any())
+                if (Context.Users.Any(Usr => Usr.Email == email))
                 {
                     status = MembershipCreateStatus.DuplicateEmail;
                     return null;
@@ -104,26 +105,16 @@ namespace TwitterClone.Membership
 
                 User NewUser = new User
                 {
-                    UserId = Guid.NewGuid(),
                     Username = username,
                     Password = HashedPassword,
-                    IsApproved = isApproved,
                     Email = email,
-                    CreateDate = DateTime.UtcNow,
-                    LastPasswordChangedDate = DateTime.UtcNow,
-                    PasswordFailuresSinceLastSuccess = 0,
-                    LastLoginDate = DateTime.UtcNow,
-                    LastActivityDate = DateTime.UtcNow,
-                    LastLockoutDate = DateTime.UtcNow,
-                    IsLockedOut = false,
-                    LastPasswordFailureDate = DateTime.UtcNow,
                     FullName = passwordQuestion,
                 };
 
                 Context.Users.Add(NewUser);
                 Context.SaveChanges();
                 status = MembershipCreateStatus.Success;
-                return new MembershipUser(System.Web.Security.Membership.Provider.Name, NewUser.Username, NewUser.UserId, NewUser.Email, null, null, NewUser.IsApproved, NewUser.IsLockedOut, NewUser.CreateDate.Value, NewUser.LastLoginDate.Value, NewUser.LastActivityDate.Value, NewUser.LastPasswordChangedDate.Value, NewUser.LastLockoutDate.Value);
+                return new MembershipUser(System.Web.Security.Membership.Provider.Name, NewUser.Username, NewUser.Email, null, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
             }
         }
 
@@ -139,52 +130,16 @@ namespace TwitterClone.Membership
             }
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
                 if (User == null)
                 {
                     return false;
                 }
-                if (!User.IsApproved)
-                {
-                    return false;
-                }
-                if (User.IsLockedOut)
-                {
-                    return false;
-                }
-                String HashedPassword = User.Password;
-                Boolean VerificationSucceeded = (HashedPassword != null && Crypto.VerifyHashedPassword(HashedPassword, password));
-                if (VerificationSucceeded)
-                {
-                    User.PasswordFailuresSinceLastSuccess = 0;
-                    User.LastLoginDate = DateTime.UtcNow;
-                    User.LastActivityDate = DateTime.UtcNow;
-                }
-                else
-                {
-                    int Failures = User.PasswordFailuresSinceLastSuccess;
-                    if (Failures < MaxInvalidPasswordAttempts)
-                    {
-                        User.PasswordFailuresSinceLastSuccess += 1;
-                        User.LastPasswordFailureDate = DateTime.UtcNow;
-                    }
-                    else if (Failures >= MaxInvalidPasswordAttempts)
-                    {
-                        User.LastPasswordFailureDate = DateTime.UtcNow;
-                        User.LastLockoutDate = DateTime.UtcNow;
-                        User.IsLockedOut = true;
-                    }
-                }
+                var HashedPassword = User.Password;
+                var VerificationSucceeded = (HashedPassword != null && Crypto.VerifyHashedPassword(HashedPassword, password));
+               
                 Context.SaveChanges();
-                if (VerificationSucceeded)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VerificationSucceeded;
             }
         }
 
@@ -196,21 +151,18 @@ namespace TwitterClone.Membership
             }
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
-                if (User != null)
-                {
-                    if (userIsOnline)
-                    {
-                        User.LastActivityDate = DateTime.UtcNow;
-                        Context.SaveChanges();
-                    }
-                    return new MembershipUser(System.Web.Security.Membership.Provider.Name, User.Username, User.UserId, User.Email, null, null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value, User.LastLoginDate.Value, User.LastActivityDate.Value, User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
-                }
-                else
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
+                if (User == null)
                 {
                     return null;
                 }
+                if (userIsOnline)
+                {
+                    Context.SaveChanges();
+                }
+                return new MembershipUser(System.Web.Security.Membership.Provider.Name, User.Username, null,
+                                          User.Email, null, null, true, false,
+                                          DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
             }
         }
 
@@ -224,21 +176,18 @@ namespace TwitterClone.Membership
 
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.Find(providerUserKey);
-                if (User != null)
-                {
-                    if (userIsOnline)
-                    {
-                        User.LastActivityDate = DateTime.UtcNow;
-                        Context.SaveChanges();
-                    }
-                    return new MembershipUser(System.Web.Security.Membership.Provider.Name, User.Username, User.UserId, User.Email, null, null, User.IsApproved, User.IsLockedOut, User.CreateDate.Value, User.LastLoginDate.Value, User.LastActivityDate.Value, User.LastPasswordChangedDate.Value, User.LastLockoutDate.Value);
-                }
-                else
+                var User = Context.Users.Find(providerUserKey);
+                if (User == null)
                 {
                     return null;
                 }
+                if (userIsOnline)
+                {
+                    Context.SaveChanges();
+                }
+                return new MembershipUser(System.Web.Security.Membership.Provider.Name, User.Username, null,
+                                          User.Email, null, null, true, false,
+                                          DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
             }
         }
 
@@ -258,42 +207,17 @@ namespace TwitterClone.Membership
             }
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
                 if (User == null)
                 {
                     return false;
                 }
-                String HashedPassword = User.Password;
-                Boolean VerificationSucceeded = (HashedPassword != null && Crypto.VerifyHashedPassword(HashedPassword, oldPassword));
-                if (VerificationSucceeded)
-                {
-                    User.PasswordFailuresSinceLastSuccess = 0;
-                }
-                else
-                {
-                    int Failures = User.PasswordFailuresSinceLastSuccess;
-                    if (Failures < MaxInvalidPasswordAttempts)
-                    {
-                        User.PasswordFailuresSinceLastSuccess += 1;
-                        User.LastPasswordFailureDate = DateTime.UtcNow;
-                    }
-                    else if (Failures >= MaxInvalidPasswordAttempts)
-                    {
-                        User.LastPasswordFailureDate = DateTime.UtcNow;
-                        User.LastLockoutDate = DateTime.UtcNow;
-                        User.IsLockedOut = true;
-                    }
-                    Context.SaveChanges();
-                    return false;
-                }
-                String NewHashedPassword = Crypto.HashPassword(newPassword);
+                var NewHashedPassword = Crypto.HashPassword(newPassword);
                 if (NewHashedPassword.Length > 128)
                 {
                     return false;
                 }
                 User.Password = NewHashedPassword;
-                User.LastPasswordChangedDate = DateTime.UtcNow;
                 Context.SaveChanges();
                 return true;
             }
@@ -303,30 +227,17 @@ namespace TwitterClone.Membership
         {
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Username == userName);
-                if (User != null)
-                {
-                    User.IsLockedOut = false;
-                    User.PasswordFailuresSinceLastSuccess = 0;
-                    Context.SaveChanges();
-                    return true;
-                }
-                else
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Username == userName);
+                if (User == null)
                 {
                     return false;
                 }
+                Context.SaveChanges();
+                return true;
             }
         }
 
-        public override int GetNumberOfUsersOnline()
-        {
-            DateTime DateActive = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(Convert.ToDouble(System.Web.Security.Membership.UserIsOnlineTimeWindow)));
-            using (DataContext Context = new DataContext())
-            {
-                return Context.Users.Where(Usr => Usr.LastActivityDate > DateActive).Count();
-            }
-        }
+       
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
@@ -336,18 +247,14 @@ namespace TwitterClone.Membership
             }
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
-                if (User != null)
-                {
-                    Context.Users.Remove(User);
-                    Context.SaveChanges();
-                    return true;
-                }
-                else
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Username == username);
+                if (User == null)
                 {
                     return false;
                 }
+                Context.Users.Remove(User);
+                Context.SaveChanges();
+                return true;
             }
         }
 
@@ -355,16 +262,8 @@ namespace TwitterClone.Membership
         {
             using (DataContext Context = new DataContext())
             {
-                User User = null;
-                User = Context.Users.FirstOrDefault(Usr => Usr.Email == email);
-                if (User != null)
-                {
-                    return User.Username;
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                var User = Context.Users.FirstOrDefault(Usr => Usr.Email == email);
+                return User != null ? User.Username : string.Empty;
             }
         }
 
@@ -373,14 +272,19 @@ namespace TwitterClone.Membership
             MembershipUserCollection MembershipUsers = new MembershipUserCollection();
             using (DataContext Context = new DataContext())
             {
-                totalRecords = Context.Users.Where(Usr => Usr.Email == emailToMatch).Count();
-                IQueryable<User> Users = Context.Users.Where(Usr => Usr.Email == emailToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
-                foreach (User user in Users)
+                totalRecords = Context.Users.Count(Usr => Usr.Email == emailToMatch);
+                var Users = Context.Users.Where(Usr => Usr.Email == emailToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
+                foreach (var user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, null, user.Email, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now));
                 }
             }
             return MembershipUsers;
+        }
+
+        public override int GetNumberOfUsersOnline()
+        {
+            return 0;
         }
 
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
@@ -388,11 +292,11 @@ namespace TwitterClone.Membership
             MembershipUserCollection MembershipUsers = new MembershipUserCollection();
             using (DataContext Context = new DataContext())
             {
-                totalRecords = Context.Users.Where(Usr => Usr.Username == usernameToMatch).Count();
-                IQueryable<User> Users = Context.Users.Where(Usr => Usr.Username == usernameToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
+                totalRecords = Context.Users.Count(Usr => Usr.Username == usernameToMatch);
+                var Users = Context.Users.Where(Usr => Usr.Username == usernameToMatch).OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
                 foreach (User user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, null, user.Email, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now));
                 }
             }
             return MembershipUsers;
@@ -407,7 +311,7 @@ namespace TwitterClone.Membership
                 IQueryable<User> Users = Context.Users.OrderBy(Usrn => Usrn.Username).Skip(pageIndex * pageSize).Take(pageSize);
                 foreach (User user in Users)
                 {
-                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, user.UserId, user.Email, null, null, user.IsApproved, user.IsLockedOut, user.CreateDate.Value, user.LastLoginDate.Value, user.LastActivityDate.Value, user.LastPasswordChangedDate.Value, user.LastLockoutDate.Value));
+                    MembershipUsers.Add(new MembershipUser(System.Web.Security.Membership.Provider.Name, user.Username, null, user.Email, null, null, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now));
                 }
             }
             return MembershipUsers;

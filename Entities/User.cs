@@ -8,47 +8,32 @@ namespace TwitterClone.Entities
     public class User
     {
         [Key]
-        public virtual Guid UserId { get; set; }
+        public virtual string Username { get; set; }
 
         [Required]
-        public virtual String Username { get; set; }
-
-        [Required]
-        public virtual String Email { get; set; }
+        public virtual string Email { get; set; }
 
         [Required, DataType(DataType.Password)]
-        public virtual String Password { get; set; }
+        public virtual string Password { get; set; }
         [Required]
-        public virtual String FullName { get; set; }
+        public virtual string FullName { get; set; }
 
         [DataType(DataType.MultilineText)]
-        public virtual String Comment { get; set; }
+        public virtual string Comment { get; set; }
 
-        public virtual String Bio { get; set; }
-        public virtual String Location { get; set; }
-        public virtual String Website { get; set; }
-        public virtual String WebsiteURL { get; set; }
+        public virtual string Bio { get; set; }
+        public virtual string Location { get; set; }
+        public virtual string Website { get; set; }
+        public virtual string WebsiteURL { get; set; }
         public virtual ICollection<List> Lists { get; set; } 
         public virtual ICollection<Tweet> Favourites { get; set; }
 
-        public virtual String BackgroundImage { get; set; }
-        public virtual String BackgroundColor { get; set; }
-        public virtual String LinkColor { get; set; }
+        public virtual string BackgroundImage { get; set; }
+        public virtual string BackgroundColor { get; set; }
+        public virtual string LinkColor { get; set; }
         public virtual Boolean Tiled { get; set; }
 
-        public virtual Boolean IsApproved { get; set; }
-        public virtual int PasswordFailuresSinceLastSuccess { get; set; }
-        public virtual DateTime? LastPasswordFailureDate { get; set; }
-        public virtual DateTime? LastActivityDate { get; set; }
-        public virtual DateTime? LastLockoutDate { get; set; }
-        public virtual DateTime? LastLoginDate { get; set; }
-        public virtual String ConfirmationToken { get; set; }
-        public virtual DateTime? CreateDate { get; set; }
-        public virtual Boolean IsLockedOut { get; set; }
-        public virtual DateTime? LastPasswordChangedDate { get; set; }
-        public virtual String PasswordVerificationToken { get; set; }
-        public virtual DateTime? PasswordVerificationTokenExpirationDate { get; set; }
-
+        
         public virtual ICollection<Role> Roles { get; set; }
         [ScriptIgnore]
         public virtual ICollection<Tweet> Tweets { get; set; }
@@ -60,7 +45,7 @@ namespace TwitterClone.Entities
 
         public string GetBackgroundImage()
         {
-            return "/Content/themes/bgs/" + BackgroundImage;
+            return "/Content/themes/bgs/" + (String.IsNullOrEmpty(BackgroundImage) ? "theme1.png" : BackgroundImage);
         }
         public string GetAvatar(string size)
         {
@@ -71,7 +56,6 @@ namespace TwitterClone.Entities
             }
             return "";
         }
-
         public string Count(string type)
         {
             var count = 0;

@@ -1,92 +1,21 @@
-﻿@{
-    ViewBag.Title = "Notfound";
-}
-
-
-<head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Language" content="en-us">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Twitter / ?</title>
-        <link href="//si0.twimg.com/favicons/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link rel="stylesheet" href="//si0.twimg.com/errors/fullscreen_errors.css">
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/document_iterator.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/find_proxy.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/get_html_text.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/global_constants.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/name_injection_builder.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/number_injection_builder.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/menu_injection_builder.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/string_finder.js"></script>
-      <script src="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/change_sink.js"></script>
-      <meta name="document_iterator.js">
-      <meta name="find_proxy.js">
-      <meta name="get_html_text.js">
-      <meta name="global_constants.js"><meta name="name_injection_builder.js">
-      <meta name="number_injection_builder.js">
-      <meta name="menu_injection_builder.js">
-      <meta name="string_finder.js"><meta name="change_sink.js">
-  </head>
-<body>
-    <div class="topbar js-topbar">
-      <div class="global-nav" data-section-term="top_nav">
-        <div class="global-nav-inner">
-          <div class="container">
-            <ul class="nav js-global-actions">
-              <li class="home">
-                <a class="nav-logo-link" href="#">
-                  <i class="bird-topbar-blue"></i>
-                </a>
-              </li>
-            </ul>
-            <div class="pull-right">
-              <ul class="nav secondary-nav">
-                <li><a href="" id="homeLink">Home →</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="blue-sky">
+﻿<link href="~/Content/fullscreen_errors.css" rel="stylesheet" />
+<div class="blue-sky">
       <div class="body-content">
-        <h1>Sorry, that page doesn’t exist!</h1>
+        <h1 style="color: white">Sorry, that page doesn’t exist!</h1>
         <p>Thanks for noticing—we're going to fix it up and have things back to normal soon.</p>
-          <form class="search-404" action="/search" method="get">
-          <label for="search_q" id="search_label">Search for a topic, full name, or </label>
-          <input id="search_q" name="q" type="text" placeholder="Search for a topic, full name, or username">
+        <form class="search-404" action="/search" method="get">
+          <label for="search_q" id="search_label">Search for a topic, full name, or @@username</label>
+          <input id="search_q" name="q" type="text" placeholder="Search for a topic, full name, or ">
           <input class="btn" id="search_submit" type="submit" value="Search">
         </form>
         <div class="footer">
-          <ul class="languages">
-            <li><a onclick="displayLanguage('id');return false;" href="#">Bahasa Indonesia</a></li>
-            <li><a onclick="displayLanguage('msa');return false;" href="#">Bahasa Melayu</a></li>
-            <li><a onclick="displayLanguage('de');return false;" href="#">Deutsch</a></li>
-            <li class="first"><a onclick="displayLanguage('en');return false;" href="#">English</a></li>
-            <li><a onclick="displayLanguage('es');return false;" href="#">Español</a></li>
-            <li><a onclick="displayLanguage('fil');return false;" href="#">Filipino</a></li>
-            <li><a onclick="displayLanguage('fr');return false;" href="#">Français</a></li>
-            <li><a onclick="displayLanguage('it');return false;" href="#">Italiano</a></li>
-            <li><a onclick="displayLanguage('nl');return false;" href="#">Nederlands</a></li>
-            <li><a onclick="displayLanguage('pt');return false;" href="#">Português</a></li>
-            <li><a onclick="displayLanguage('tr');return false;" href="#">Türkçe</a></li>
-            <li><a onclick="displayLanguage('ru');return false;" href="#">Русский</a></li>
-            <li><a onclick="displayLanguage('hi');return false;" href="#">हिन्दी</a></li>
-            <li><a onclick="displayLanguage('ja');return false;" href="#">日本語</a></li>
-            <li><a onclick="displayLanguage('zh_cn');return false;" href="#">简体中文</a></li>
-            <li><a onclick="displayLanguage('zh_tw');return false;" href="#">繁體中文</a></li>
-            <li><a onclick="displayLanguage('ko');return false;" href="#">한국어</a></li>
-          </ul>
+          
           <ul class="links">
             <li class="first">© 2012 Twitter</li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/help">Help</a></li>
           <li><a href="http://status.twitter.com/">Status</a></li>
           </ul>
         </div>
       </div>
     </div>
-
-       
-
-</body>

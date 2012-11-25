@@ -171,45 +171,9 @@
     <Compile Include="Membership\CodeFirstRoleProvider.cs" />
     <Compile Include="Membership\Crypto.cs" />
     <Compile Include="Membership\WebSecurity.cs" />
-    <Compile Include="Migrations\201209141916330_InitialCreate.cs" />
-    <Compile Include="Migrations\201209141916330_InitialCreate.Designer.cs">
-      <DependentUpon>201209141916330_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201209281821517_Initial.cs" />
-    <Compile Include="Migrations\201209281821517_Initial.Designer.cs">
-      <DependentUpon>201209281821517_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201210101857444_Added Full Name to Users.cs" />
-    <Compile Include="Migrations\201210101857444_Added Full Name to Users.Designer.cs">
-      <DependentUpon>201210101857444_Added Full Name to Users.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211231454506_Added Bio field.cs" />
-    <Compile Include="Migrations\201211231454506_Added Bio field.Designer.cs">
-      <DependentUpon>201211231454506_Added Bio field.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211231457088_Added location, web fields to User.cs" />
-    <Compile Include="Migrations\201211231457088_Added location, web fields to User.Designer.cs">
-      <DependentUpon>201211231457088_Added location, web fields to User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211231644021_Favourites converted to list.cs" />
-    <Compile Include="Migrations\201211231644021_Favourites converted to list.Designer.cs">
-      <DependentUpon>201211231644021_Favourites converted to list.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211241219339_Added Lists.cs" />
-    <Compile Include="Migrations\201211241219339_Added Lists.Designer.cs">
-      <DependentUpon>201211241219339_Added Lists.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211241643578_Updated Lists Model.cs" />
-    <Compile Include="Migrations\201211241643578_Updated Lists Model.Designer.cs">
-      <DependentUpon>201211241643578_Updated Lists Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211250839411_Updated Users Model.cs" />
-    <Compile Include="Migrations\201211250839411_Updated Users Model.Designer.cs">
-      <DependentUpon>201211250839411_Updated Users Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201211251209272_Updated Users Model added tiled field.cs" />
-    <Compile Include="Migrations\201211251209272_Updated Users Model added tiled field.Designer.cs">
-      <DependentUpon>201211251209272_Updated Users Model added tiled field.cs</DependentUpon>
+    <Compile Include="Migrations\201211251539591_Final.cs" />
+    <Compile Include="Migrations\201211251539591_Final.Designer.cs">
+      <DependentUpon>201211251539591_Final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -219,6 +183,7 @@
   <ItemGroup>
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\core.bundle.css" />
+    <Content Include="Content\fullscreen_errors.css" />
     <Content Include="Content\Images\DefaultAvatar.png" />
     <Content Include="Content\Images\DefaultProfilePicture.png" />
     <Content Include="Content\more.bundle.css" />
@@ -257,7 +222,45 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
-    <Content Include="Content\themes\bgs\bg.png" />
+    <Content Include="Content\themes\bgs\ahmed.JPG" />
+    <Content Include="Content\themes\bgs\swatch1.gif" />
+    <Content Include="Content\themes\bgs\swatch10.gif" />
+    <Content Include="Content\themes\bgs\swatch11.gif" />
+    <Content Include="Content\themes\bgs\swatch12.gif" />
+    <Content Include="Content\themes\bgs\swatch13.gif" />
+    <Content Include="Content\themes\bgs\swatch14.gif" />
+    <Content Include="Content\themes\bgs\swatch15.gif" />
+    <Content Include="Content\themes\bgs\swatch16.gif" />
+    <Content Include="Content\themes\bgs\swatch17.gif" />
+    <Content Include="Content\themes\bgs\swatch18.gif" />
+    <Content Include="Content\themes\bgs\swatch19.gif" />
+    <Content Include="Content\themes\bgs\swatch2.gif" />
+    <Content Include="Content\themes\bgs\swatch3.gif" />
+    <Content Include="Content\themes\bgs\swatch4.gif" />
+    <Content Include="Content\themes\bgs\swatch5.gif" />
+    <Content Include="Content\themes\bgs\swatch6.gif" />
+    <Content Include="Content\themes\bgs\swatch7.gif" />
+    <Content Include="Content\themes\bgs\swatch8.gif" />
+    <Content Include="Content\themes\bgs\swatch9.gif" />
+    <Content Include="Content\themes\bgs\theme1.png" />
+    <Content Include="Content\themes\bgs\theme10.gif" />
+    <Content Include="Content\themes\bgs\theme11.gif" />
+    <Content Include="Content\themes\bgs\theme12.gif" />
+    <Content Include="Content\themes\bgs\theme13.gif" />
+    <Content Include="Content\themes\bgs\theme14.gif" />
+    <Content Include="Content\themes\bgs\theme15.png" />
+    <Content Include="Content\themes\bgs\theme16.gif" />
+    <Content Include="Content\themes\bgs\theme17.gif" />
+    <Content Include="Content\themes\bgs\theme18.gif" />
+    <Content Include="Content\themes\bgs\theme19.gif" />
+    <Content Include="Content\themes\bgs\theme2.gif" />
+    <Content Include="Content\themes\bgs\theme3.gif" />
+    <Content Include="Content\themes\bgs\theme4.gif" />
+    <Content Include="Content\themes\bgs\theme5.gif" />
+    <Content Include="Content\themes\bgs\theme6.gif" />
+    <Content Include="Content\themes\bgs\theme7.gif" />
+    <Content Include="Content\themes\bgs\theme8.gif" />
+    <Content Include="Content\themes\bgs\theme9.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\avatar_placeholder.png" />
@@ -345,6 +348,7 @@
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\Password.cshtml" />
     <Content Include="Views\Account\Design.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
