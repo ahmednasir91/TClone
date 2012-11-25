@@ -1,0 +1,43 @@
+﻿<div class="content-main">
+    <div class="content-header">
+        <div class="header-inner">
+            <h2>Account</h2>
+            <p class="subheader">Change your basic account, language, Tweet privacy, and location settings.</p>
+        </div>
+    </div>
+    <div class="content-inner no-stream-end">
+        <form id="account-form" class="form-horizontal requires-password" method="POST" action="@Url.Action("AccountSettings")">
+            @if (!ViewData.ModelState.IsValidField("Email") || !ViewData.ModelState.IsValidField("Username"))
+            {
+                <div id="settings-alert-box" class="alert">
+                    <i id="settings-alert-close" class="close"></i>
+                    <h4>Please correct the following errors.</h4>
+                    <div id="settings-alert-message">
+                    </div>
+                </div>
+            }
+            <fieldset id="username_fieldset" class="control-group">
+                <label for="Username" class="control-label">Username</label>
+                <div class="controls">
+                    <p id="username_notification" class="notification"></p>
+                    <input id="Username" maxlength="15" name="Username" type="text" value="@Model.Username">
+                    @Html.ValidationMessage("Username")
+                    <p class="notification">http://@Request.Url.Authority/<span id="username_path">@Model.Username</span></p>
+                </div>
+            </fieldset>
+            <fieldset id="email_fieldset" class="control-group">
+                <label for="Email" class="control-label">Email</label>
+                <div class="controls">
+                    <p id="email_notification" class="notification"></p>
+                    <input id="Email" class="email-input" name="Email" type="text" value="@Model.Email">
+                    @Html.ValidationMessage("Email")
+                </div>
+            </fieldset>
+            <hr>
+            <div class="form-actions">
+                <button id="settings_save" class="btn primary-btn" type="submit">Save changes</button>
+            </div>
+
+        </form>
+    </div>
+</div>

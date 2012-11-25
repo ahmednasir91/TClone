@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using TwitterClone.Context;
+using TwitterClone.Entities;
 using TwitterClone.Membership;
 using TwitterClone.Models;
 
@@ -14,6 +16,60 @@ namespace TwitterClone.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        public Repository Repository = new Repository();
+
+        [HttpPost]
+        public ActionResult UpdateDesign(User user)
+        {
+            ViewBag.Settings = "Design";
+            return Json(Repository.UpdateDesign(user) ? "Settings Saved!" : "Error changing settings");
+        }
+
+        [HttpPost]
+        public ActionResult UploadBackground(HttpPostedFileBase BackgroundImage)
+        {
+            if (BackgroundImage != null && IsImage(BackgroundImage) && BackgroundImage.ContentLength > 0)
+                return Json(Repository.SaveBackground(BackgroundImage));
+            return Json("");
+        }
+
+        public ActionResult ProfileSettings(string Settings)
+        {
+            ViewBag.Settings = Settings;
+            return View(Repository.GetCurrentUser());
+        }
+        [HttpPost]
+        public ActionResult AccountSettings(User user)
+        {
+            ViewBag.Settings = "Account";
+            if (ModelState.IsValidField("Email") && ModelState.IsValidField("Username"))
+            {
+                Repository.UpdateUserBasic(user);
+                ViewBag.Info = "Settings Saved!";
+            }
+            if(String.Equals(user.Username, User.Identity.Name))
+                return View("ProfileSettings", Repository.GetCurrentUser());
+            return RedirectToAction("SignOut");
+        }
+
+        [HttpPost]
+        public ActionResult ProfileSettings(User user, HttpPostedFileBase Avatar)
+        {
+            if (Avatar != null && IsImage(Avatar) && Avatar.ContentLength > 0)
+                Repository.SaveAvatar(Avatar);
+            if (ModelState.IsValidField("FullName") && ModelState.IsValidField("Location") && ModelState.IsValidField("WebsiteURL") && ModelState.IsValidField("Bio"))
+                Repository.UpdateUserInfo(user);
+            ViewBag.Info = "Settings Saved!";
+            ViewBag.Settings = "Profile";
+            return View("ProfileSettings", Repository.GetCurrentUser());
+        }
+
+        [HttpPost]
+        public ActionResult DesignSettings(User user)
+        {
+            ViewBag.Settings = "Design";
+            return View("ProfileSettings", Repository.GetCurrentUser());
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -173,6 +229,19 @@ namespace TwitterClone.Controllers
         private IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
+        }
+
+        private bool IsImage(HttpPostedFileBase file)
+        {
+            if (file.ContentType.Contains("image"))
+            {
+                return true;
+            }
+
+            string[] formats = new string[] { ".jpg", ".png", ".gif", ".jpeg" }; // add more if u like...
+
+            // linq from Henrik Stenbæk
+            return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
 
         #region Status Codes

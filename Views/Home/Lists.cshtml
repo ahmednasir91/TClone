@@ -1,0 +1,79 @@
+﻿@model TwitterClone.Entities.User
+@{
+    var listsEmpty = Model.Lists.Count > 0 ? "has-items" : "";
+}
+<div class="content-main" id="timeline">
+    <div class="content-header">
+        <div class="header-inner">
+            <span class="content-header-buttons js-header-button-container">
+                @if (String.Equals(User.Identity.Name, Model.Username))
+                {
+                    <button type="button" class="btn js-create-list-button" data-modal="list-new" data-element-term="create_list_button">Create list</button>
+                }
+            </span>
+            <h2 class="js-timeline-title">Lists
+            <small class="view-toggler"><a class="toggle-item-1 active js-nav" href="/@Model.Username/lists">Subscribed to</a> / <a class="toggle-item-2  js-nav" href="/@Model.Username/lists/memberships">Member of</a></small>
+            </h2>
+        </div>
+    </div>
+    <div class="stream-container " data-cursor="">
+        <div class="stream profile-stream">
+            <!-- List -->
+            @foreach(var list in Model.Lists) {
+                <div class="stream-items" id="stream-items-id">
+                    <div class="js-stream-item stream-item stream-item" data-item-type="list" id="stream-item-list-81093204">
+                        <div class="list js-list js-profile-popup-actionable">
+                            <div class="content">
+                                <div class="stream-item-header">
+                                    <a class="js-list-link js-nav" href="/@Model.Username/@list.ListName">
+                                        <strong>FirstList</strong></a>
+                                    <a class="js-user-profile-link">
+                                        <img class="avatar size32" src="@list.User.GetAvatar("small")" alt="Ahmed">
+                                    </a><span class="username">by <a class="js-user-profile-link" href="/@Model.Username">@Model.FullName</a></span>
+                                </div>
+                                <p class="bio ">@Model.Bio</p>
+                                <p class="metadata">
+                                    0 members
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            <!-- /List -->
+            <div class="stream-footer ">
+                <div class="timeline-end @listsEmpty ">
+                    <div class="stream-end">
+                        <div class="stream-end-inner">
+                            <i class="bird-etched"></i>
+                            <p class="empty-text">You aren't following any lists yet.</p>
+                            <p>
+                                <button type="button" class="btn-link back-to-top hidden">Back to top ↑</button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stream-loading">
+                        <div class="stream-end-inner">
+                            <span class="spinner" title="Loading..."></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stream-fail-container">
+                <div class="js-stream-whale-end stream-whale-end stream-placeholder centered-placeholder">
+                    <div class="stream-end-inner">
+                        <h2 class="title">Loading seems to be taking a while.</h2>
+                        <p>
+                            Twitter may be over capacity or experiencing a momentary hiccup. <a href="#" class="try-again-after-whale">Try again</a> or visit <a target="_blank" href="http://status.twitter.com">Twitter Status</a> for more information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-replies-container"></div>
+            <div class="stream-autoplay-marker">
+                <i class="arrow"></i>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+</div>

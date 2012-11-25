@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Page = "Home";
-    var ProfilePicture = Model.Avatar ?? "/Content/Images/DefaultProfilePicture.png";
+    var ProfilePicture = (Model.Avatar == null) ? "/Content/Images/DefaultProfilePicture.png" : Model.GetAvatar("small");
     string listName = String.Equals(ViewBag.List, "Followers") || String.Equals(ViewBag.List, "Following") ? "UsersList" : ViewBag.List;
 }
 @using TwitterClone.Helpers

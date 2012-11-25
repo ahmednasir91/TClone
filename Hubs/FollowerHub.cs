@@ -20,7 +20,7 @@ namespace TwitterClone.Hubs
                 suggestions.Add(new JObject
                                     {
                                         new JProperty("UserName", suggestion.Username),
-                                        new JProperty("Avatar", suggestion.Avatar ?? "/Content/Images/DefaultAvatar.png"),
+                                        new JProperty("Avatar", suggestion.GetAvatar("small") ?? "/Content/Images/DefaultAvatar.png"),
                                         new JProperty("FullName", suggestion.FullName),
                                         new JProperty("Url", "/" + suggestion.Username),
                                     });

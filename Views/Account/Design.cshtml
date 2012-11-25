@@ -1,0 +1,176 @@
+﻿<link rel="stylesheet" class="page-css" href="~/Content/profile_settings.bundle.css" type="text/css" media="screen">
+<div class="content-main">
+    <div class="content-header">
+        <div class="header-inner">
+            <h2>Design</h2>
+            <p class="subheader">Customize the way Twitter looks for you and how your profile looks to others.</p>
+        </div>
+    </div>
+    <div class="content-inner no-stream-end">
+        <form id="design-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="@Url.Action("UpdateDesign")">
+            <div id="settings-alert-box" class="alert" style="display: none;">
+                <i id="settings-alert-close" class="close"></i>
+            </div>
+            <h3 class="settings-header">Pick a premade theme</h3>
+            <fieldset class="control-group">
+                <ul class="theme-list clearfix">
+                    <li class="theme-item">
+                        <label class="theme selected" data-image="/Content/themes/bgs/theme1.png" data-id="1" data-background_color="#C0DEED" data-link_color="#0084B4" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch1.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme2.gif" data-id="2" data-background_color="#C6E2EE" data-link_color="#1F98C7" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch2.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme3.gif" data-id="3" data-background_color="#EDECE9" data-link_color="#088253" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch3.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme4.gif" data-id="4" data-background_color="#0099B9" data-link_color="#0099B9" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch4.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme5.gif" data-id="5" data-background_color="#352726" data-link_color="#D02B55" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch5.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme6.gif" data-id="6" data-background_color="#709397" data-link_color="#FF3300" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch6.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme7.gif" data-id="7" data-background_color="#EBEBEB" data-link_color="#990000" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch7.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme8.gif" data-id="8" data-background_color="#8B542B" data-link_color="#9D582E" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch8.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme9.gif" data-id="9" data-background_color="#1A1B1F" data-link_color="#2FC2EF" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch9.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme10.gif" data-id="10" data-background_color="#642D8B" data-link_color="#FF0000" data-tiled="true">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch10.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme11.gif" data-id="11" data-background_color="#FF6699" data-link_color="#B40B43" data-tiled="true">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch11.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme12.gif" data-id="12" data-background_color="#BADFCD" data-link_color="#FF0000" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch12.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme13.gif" data-id="13" data-background_color="#B2DFDA" data-link_color="#93A644" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch13.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme14.gif" data-id="14" data-background_color="#131516" data-link_color="#009999" data-tiled="true">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch14.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme15.png" data-id="15" data-background_color="#022330" data-link_color="#0084B4" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch15.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme16.gif" data-id="16" data-background_color="#9AE4E8" data-link_color="#0084B4" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch16.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme17.gif" data-id="17" data-background_color="#DBE9ED" data-link_color="#CC3366" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch17.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme18.gif" data-id="18" data-background_color="#ACDED6" data-link_color="#038543" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch18.gif">
+                        </label>
+                    </li>
+                    <li class="theme-item">
+                        <label class="theme" data-image="/Content/themes/bgs/theme19.gif" data-id="19" data-background_color="#FFF04D" data-link_color="#0099CC" data-tiled="false">
+                            <span class="selected-border"></span>
+                            <img class="theme-image" src="/Content/themes/bgs/swatch19.gif">
+                        </label>
+                    </li>
+                </ul>
+            </fieldset>
+            <hr>
+            <h3 class="settings-header">Customize your own</h3>
+            <fieldset class="control-group">
+                <p>See your changes instantly; they're not saved until you click "Save changes." </p>
+            </fieldset>
+            <fieldset class="control-group">
+                <label class="control-label">Background</label>
+                <div class="controls background-settings">
+                    <div class="uploader-image uploader-background clearfix">
+                        <span id="background_image_preview" class="image-preview bg-preview" style="background-image: url(/Content/themes/bgs/theme1.png)"></span>
+                        <div class="uploader-tools">
+                            <div class="photo-selector">
+                                <button class="btn" type="button">Change background</button>
+                                <span class="photo-file-name">No file selected</span>
+                                <div class="image-selector">
+                                    <input type="file" name="BackgroundImage" class="file-input">
+                                </div>
+                            </div>
+                            <p>Maximum file size of 800K</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="control-group">
+                <label class="control-label">Background color</label>
+                <div class="controls">
+                    <div id="background_color" class="color-preview" style="background-color: #C0DEED;"></div>
+                    <input id="background_color_hex" class="input-small input-color" type="text" data-type="background_color" data-color="#C0DEED" value="#C0DEED" name="BackgroundColor">
+                </div>
+            </fieldset>
+            <fieldset class="control-group">
+                <label class="control-label">Link color</label>
+                <div class="controls">
+                    <div id="links_color" class="color-preview" style="background-color: #0084B4;"></div>
+                    <input id="links_color_hex" class="input-small input-color" data-type="links_color" data-color="#0084B4" type="text" value="#0084B4" name="LinkColor">
+                </div>
+            </fieldset>
+            <hr>
+            <div class="form-actions">
+                <button id="settings_save" class="btn primary-btn" type="submit">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Linq;
 using System.Web;
 using SignalR.Hubs;
 using TwitterClone.Context;
@@ -28,11 +29,23 @@ namespace TwitterClone.Hubs
             Clients[Context.User.Identity.Name].ShowTweet(tweet.ToJson());
         }
 
-        public void GetAll(string username = "")
+        public void GetAll(string username = "", bool onlyFavs = false)
         {
+            if (onlyFavs)
+            {
+                foreach (var favourite in repository.GetFavourites(true))
+                    Caller.AddAll(favourite.ToJson(HttpContext.Current.User.Identity.Name, repository.GetFavourites()));
+                return;
+            }
+            if (!String.IsNullOrEmpty(username))
+            {
+                foreach(var tweet in repository.GetTweets(username))
+                    Caller.AddAll(tweet.ToJson(username, repository.GetFavourites(false, username)));
+                return;
+            }
             foreach (var tweet in repository.GetCurentUserTweets(String.IsNullOrEmpty(username)))
             {
-                Caller.AddAll(tweet.ToJson(HttpContext.Current.User.Identity.Name));
+                Caller.AddAll(tweet.ToJson(HttpContext.Current.User.Identity.Name, repository.GetFavourites()));
             }
         }
 
@@ -48,7 +61,6 @@ namespace TwitterClone.Hubs
         public void Deletetweet(int id)
         {
             repository.DeleteTweet(id);
-           // GetAll();
         }
     }
 }

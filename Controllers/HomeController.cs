@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using TwitterClone.Context;
+using TwitterClone.Entities;
 
 namespace TwitterClone.Controllers
 {
@@ -14,6 +16,7 @@ namespace TwitterClone.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.List = "TweetsList";
             var model = userRepo.GetUser(User.Identity.Name);
             return User.Identity.IsAuthenticated ? View("LoggedIn", model) : View();
         }
@@ -41,18 +44,44 @@ namespace TwitterClone.Controllers
             return View(user);
         }
 
-        public ActionResult Following()
+        public ActionResult Following(string username)
         {
             ViewBag.List = "Following";
-            return View("Show", userRepo.GetCurrentUser());
+            return View("Show", userRepo.GetUser(username));
         }
 
-        public ActionResult Followers()
+        public ActionResult Followers(string username)
         {
             ViewBag.List = "Followers";
-            return View("Show", userRepo.GetCurrentUser());
+            return View("Show", userRepo.GetUser(username));
         }
 
+        public ActionResult Favorites(string username)
+        {
+            ViewBag.List = "Favorites";
+            return View("Show", userRepo.GetUser(username));
+        }
+
+        public ActionResult Lists(string username)
+        {
+            ViewBag.List = "Lists";
+            var user = userRepo.GetUser(username);
+            if (user == null)
+                return Redirect("/404");
+            user.Lists = userRepo.Lists(username);
+            return View("Show", user);
+        }
+        [HttpPost]
+        public ActionResult NewList(List list)
+        {
+            if (ModelState.IsValid)
+            {
+                userRepo.NewList(list);
+                Redirect("/" + User.Identity.Name + "/lists");
+            }
+            ViewBag.Error = ModelState.Keys.SelectMany(key => ModelState[key].Errors).ToList();
+            return Redirect("/" + User.Identity.Name + "/lists");
+        }
     }
 
 }

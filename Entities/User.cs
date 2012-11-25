@@ -28,6 +28,13 @@ namespace TwitterClone.Entities
         public virtual String Location { get; set; }
         public virtual String Website { get; set; }
         public virtual String WebsiteURL { get; set; }
+        public virtual ICollection<List> Lists { get; set; } 
+        public virtual ICollection<Tweet> Favourites { get; set; }
+
+        public virtual String BackgroundImage { get; set; }
+        public virtual String BackgroundColor { get; set; }
+        public virtual String LinkColor { get; set; }
+        public virtual Boolean Tiled { get; set; }
 
         public virtual Boolean IsApproved { get; set; }
         public virtual int PasswordFailuresSinceLastSuccess { get; set; }
@@ -51,6 +58,10 @@ namespace TwitterClone.Entities
         public virtual ICollection<User> Following { get; set; }
         public string Avatar { get; set; }
 
+        public string GetBackgroundImage()
+        {
+            return "/Content/themes/bgs/" + BackgroundImage;
+        }
         public string GetAvatar(string size)
         {
             switch(size)

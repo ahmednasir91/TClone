@@ -1,0 +1,61 @@
+﻿@using TwitterClone.Helpers
+@model TwitterClone.Entities.User
+
+@{
+    ViewBag.Page = "Settings";
+    ViewBag.Info = ViewBag.Info ?? "";
+    string Settings = ViewBag.Settings;
+}
+@Html.UserStyle();
+<div id="page-container" class="wrapper wrapper-settings white" data-message="@ViewBag.Info">
+    <div class="dashboard">
+        <div class="module mini-profile">
+            <div class="flex-module profile-summary js-profile-summary">
+                <a href="/@Model.Username" class="account-summary account-summary-small js-nav" data-nav="profile">
+                    <div class="content">
+                        <div class="account-group js-mini-current-user">
+                            <img class="avatar size32" src="@Model.GetAvatar("small")" alt="@Model.FullName">
+                            <b class="fullname">@Model.FullName</b>
+                            <small class="metadata">View my profile page</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="module">
+            <ul class="js-nav-links" data-page="@Settings">
+                <li class=""><a class="list-link js-nav" href="/settings/account" data-nav="Account">Account <i class="chev-right"></i></a></li>
+                <li class=""><a class="list-link js-nav" href="/settings/password" data-nav="Password">Password<i class="chev-right"></i></a></li>
+                <li class=""><a class="list-link js-nav" href="/settings/profile" data-nav="Profile">Profile <i class="chev-right"></i></a></li>
+                <li class=""><a class="list-link js-nav" href="/settings/design" data-nav="Design">Design <i class="chev-right"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="module site-footer ">
+            <div class="flex-module">
+                <div class="flex-module-inner js-items-container">
+                    <ul class="clearfix">
+                        <li class="copyright">© 2012 Twitter</li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="//support.twitter.com">Help</a></li>
+                        <li><a href="/tos">Terms</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="http://blog.twitter.com">Blog</a></li>
+                        <li><a href="http://status.twitter.com">Status</a></li>
+                        <li><a href="/download">Apps</a></li>
+                        <li><a href="/about/resources">Resources</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                        <li><a href="//business.twitter.com/en/advertise/start">Advertisers</a></li>
+                        <li><a href="//business.twitter.com/index_en.html">Businesses</a></li>
+                        <li><a href="http://media.twitter.com">Media</a></li>
+                        <li><a href="//dev.twitter.com">Developers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial(Settings)
+    
+</div>

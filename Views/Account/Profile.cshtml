@@ -1,0 +1,71 @@
+﻿
+<div class="content-main">
+    <div class="content-header">
+        <div class="header-inner">
+            <h2>Profile</h2>
+            <p class="subheader">This information appears on your public profile, search results, and beyond.</p>
+        </div>
+    </div>
+    <div class="content-inner no-stream-end">
+        <form id="profile-form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="@Url.Action("ProfileSettings")">
+            <div id="settings-alert-box" class="alert" style="display: none;">
+                <i id="settings-alert-close" class="close"></i>
+            </div>
+            <fieldset id="profile-image-controls" class="control-group">
+                <label class="control-label" for="Avatar">Photo</label>
+                <div class="controls">
+                    <div class="uploader-avatar clearfix">
+                        <img class="avatar size73" id="avatar_preview" src="@Model.GetAvatar("small")">
+                        <div class="uploader-tools">
+                            <div id="duckface-uploader" style="">
+                                <div id="choose-photo" class="dropdown">
+                                    <div class="photo-selector">
+                                        <button class="btn" type="button">Change photo</button>
+                                        <span class="photo-file-name">No file selected</span>
+                                        <div class="image-selector">
+                                            <input type="file" name="avatar" class="file-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>This photo is your identity on Twitter and appears with your Tweets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <hr>
+            <fieldset class="control-group">
+                <label class="control-label" for="FullName">Name</label>
+                <div class="controls">
+                    <input id="FullName" maxlength="20" type="text" name="FullName" value="@Model.FullName"> @Html.ValidationMessage("FullName")
+                    <p>Enter your real name, so people you know can recognize you.</p>
+                </div>
+            </fieldset>
+            <fieldset class="control-group">
+                <label class="control-label" for="Location">Location</label>
+                <div class="controls">
+                    <input id="Location" name="Location" type="text" value="@Model.Location"> @Html.ValidationMessage("Location")
+                    <p>Where in the world are you?</p>
+                </div>
+            </fieldset>
+            <fieldset id="user_web_fieldset" class="control-group">
+                <label class="control-label" for="WebsiteURL">Website</label>
+                <div class="controls">
+                    <input id="WebsiteURL" name="WebsiteURL" size="30" type="text" value="@Model.WebsiteURL"> @Html.ValidationMessage("WebsiteURL")
+                    <p>Have a homepage or a blog? Put the address here.</p>
+                </div>
+            </fieldset>
+            <fieldset class="control-group">
+                <label class="control-label" for="Bio">Bio</label>
+                <div id="user_description_box" class="controls">
+                    <textarea class="input-xlarge" id="Bio" name="Bio">@Model.Bio</textarea> @Html.ValidationMessage("Bio")
+                    <p class="bio-label">About yourself in <strong>160</strong> characters or less. </p>
+                </div>
+            </fieldset>
+            <hr>
+            <div class="form-actions">
+                <button id="settings_save" class="btn primary-btn" type="submit">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>

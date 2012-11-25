@@ -191,6 +191,26 @@
     <Compile Include="Migrations\201211231457088_Added location, web fields to User.Designer.cs">
       <DependentUpon>201211231457088_Added location, web fields to User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201211231644021_Favourites converted to list.cs" />
+    <Compile Include="Migrations\201211231644021_Favourites converted to list.Designer.cs">
+      <DependentUpon>201211231644021_Favourites converted to list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211241219339_Added Lists.cs" />
+    <Compile Include="Migrations\201211241219339_Added Lists.Designer.cs">
+      <DependentUpon>201211241219339_Added Lists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211241643578_Updated Lists Model.cs" />
+    <Compile Include="Migrations\201211241643578_Updated Lists Model.Designer.cs">
+      <DependentUpon>201211241643578_Updated Lists Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211250839411_Updated Users Model.cs" />
+    <Compile Include="Migrations\201211250839411_Updated Users Model.Designer.cs">
+      <DependentUpon>201211250839411_Updated Users Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211251209272_Updated Users Model added tiled field.cs" />
+    <Compile Include="Migrations\201211251209272_Updated Users Model added tiled field.Designer.cs">
+      <DependentUpon>201211251209272_Updated Users Model added tiled field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,6 +228,7 @@
     <Content Include="Content\phoenix\img\error.png" />
     <Content Include="Content\phoenix\img\loader.gif" />
     <Content Include="Content\phoenix\img\spinner-small.gif" />
+    <Content Include="Content\profile_settings.bundle.css" />
     <Content Include="Content\signup.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -317,6 +338,13 @@
     <Content Include="Views\Home\Show.cshtml" />
     <Content Include="Views\Home\UsersList.cshtml" />
     <Content Include="Views\Home\profile-nav.cshtml" />
+    <Content Include="Views\Home\Favorites.cshtml" />
+    <Content Include="Views\Home\Lists.cshtml" />
+    <Content Include="Views\Account\ProfileSettings.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Password.cshtml" />
+    <Content Include="Views\Account\Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
