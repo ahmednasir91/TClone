@@ -18,9 +18,6 @@ namespace TwitterClone.Entities
         [Required]
         public virtual string FullName { get; set; }
 
-        [DataType(DataType.MultilineText)]
-        public virtual string Comment { get; set; }
-
         public virtual string Bio { get; set; }
         public virtual string Location { get; set; }
         public virtual string Website { get; set; }

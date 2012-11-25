@@ -88,7 +88,59 @@
     </div>
 
     <!-- /Lists Dialog -->
-
+    <!-- New Tweet Dialog -->
+    <div id="global-tweet-dialog" class="modal-container" data-modal="true" style="display: none;">
+        <div class="close-modal-background-target"></div>
+        <div class="modal draggable" style="left: 423px;">
+            <div class="modal-content">
+                <button type="button" class="modal-btn modal-close"><i class="close-medium"><span class="hidden-elements">Close</span></i></button>
+  
+                <div class="modal-header">
+                    <h3 class="modal-title">What's happening?</h3>
+                </div>
+  
+                <div class="modal-body">
+                    <form class="tweet-form" method="post" target="tweet-post-iframe" action="//upload.twitter.com/i/tweet/create_with_media.iframe" enctype="multipart/form-data">
+                      <div class="tweet-content">
+                            <label class="hidden-elements" for="tweet-box-global">Tweet text</label>
+                            <textarea class="tweet-box" id="tweet-box-global" dir="ltr" style="" data-bind="value: message, valueUpdate: 'afterkeydown'"></textarea>
+          
+                            <ul class="dropdown-menu autocomplete-results" style="display: none;">
+                                <li class="dropdown-link dropdown-account template-row autocomplete-item">
+                                    <img width="24" height="24" class="avatar size24">
+                                    <strong class="fullname"></strong>
+                                    <span class="pretty-link"><small>@@</small><b class="username"></b></span>
+                                </li>
+                            </ul>
+              
+                            <div class="thumbnail-container">
+                                <div class="preview">
+                                    <a class="dismiss js-dismiss" href="#" tabindex="-1"><i class="dismiss-white"></i></a>
+                                    <span class="filename"></span>
+                                </div>
+                                <div class="preview-message">Image will appear as a link</div>
+                            </div>
+          
+                        </div>
+          
+                        <div class="toolbar js-toolbar" role="toolbar">
+                            <div class="tweet-box-extras">
+          
+                       </div>
+                            <div class="tweet-button">
+                                <span class="spinner"></span>
+                                <span class="tweet-counter" data-bind="text: tweetcount">140</span>
+                                <button class="btn primary-btn tweet-action" type="button" data-bind="disable: tweetcount > 0, attr: {'class': btnclass}">Tweet</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+  
+                <div class="modal-footer modal-tweet" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /New Tweet Dialog -->
     <section id="modals-alerts">
 
         <div class="alert-messages hidden" id="message-drawer">

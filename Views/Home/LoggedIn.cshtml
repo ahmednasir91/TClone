@@ -25,11 +25,11 @@
 
                             <strong><span data-bind="text: tweetsCount">@Model.Count("Tweets")</span></strong> Tweets
                     </a></li>
-                    <li><a class="js-nav" href="/following" data-element-term="following_stats" data-nav="following">
+                    <li><a class="js-nav" href="/@Model.Username/following" data-element-term="following_stats" data-nav="following">
 
                         <strong>@Model.Count("Following")</strong> Following
                     </a></li>
-                    <li><a class="js-nav" href="/followers" data-element-term="follower_stats" data-nav="followers">
+                    <li><a class="js-nav" href="/@Model.Username/followers" data-element-term="follower_stats" data-nav="followers">
 
                         <strong>@Model.Count("Followers")</strong> Followers
                     </a></li>
@@ -67,52 +67,6 @@
                     <a href="/who_to_follow/interests" class="js-interests-link" data-element-term="interests_link">Browse categories</a> · <a href="/who_to_follow/import" class="js-find-friends-link" data-element-term="import_link">Find friends</a>
                 </div>
 
-            </div>
-        </div>
-        <div class="module trends">
-            <div class="flex-module trends-inner">
-                <div class="flex-module-header">
-
-                    <h3>
-                        <span class="js-trend-location">Trends
-                        </span>
-                    </h3>
-                    <small>· <a href="#" data-modal="change-trends" class="change-trends js-trend-toggle">Change</a></small>
-                </div>
-                <div class="flex-module-inner">
-                    <ul class="trend-items js-trends">
-                        <li class="js-trend-item  " data-trend-name="#groenlinks">
-                            <a class="js-nav" href="/search?q=%23groenlinks&amp;src=tren" data-query-source="trend_click">#groenlinks</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="#MentionSomeoneWhoCanAlwaysMakeYouSmile">
-                            <a class="js-nav" href="/search?q=%23MentionSomeoneWhoCanAlwaysMakeYouSmile&amp;src=tren" data-query-source="trend_click">#MentionSomeoneWhoCanAlwaysMakeYouSmile</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="#pvda">
-                            <a class="js-nav" href="/search?q=%23pvda&amp;src=tren" data-query-source="trend_click">#pvda</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Den Bosch">
-                            <a class="js-nav" href="/search?q=%22Den+Bosch%22&amp;src=tren" data-query-source="trend_click">Den Bosch</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Twitter">
-                            <a class="js-nav" href="/search?q=Twitter&amp;src=tren" data-query-source="trend_click">Twitter</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Groningen">
-                            <a class="js-nav" href="/search?q=Groningen&amp;src=tren" data-query-source="trend_click">Groningen</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Nog 2">
-                            <a class="js-nav" href="/search?q=%22Nog+2%22&amp;src=tren" data-query-source="trend_click">Nog 2</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Dutch">
-                            <a class="js-nav" href="/search?q=Dutch&amp;src=tren" data-query-source="trend_click">Dutch</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Andorra">
-                            <a class="js-nav" href="/search?q=Andorra&amp;src=tren" data-query-source="trend_click">Andorra</a>
-                        </li>
-                        <li class="js-trend-item  " data-trend-name="Funda">
-                            <a class="js-nav" href="/search?q=Funda&amp;src=tren" data-query-source="trend_click">Funda</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="module site-footer ">

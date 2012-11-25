@@ -81,6 +81,7 @@ namespace TwitterClone.Context
         public bool Follower(string username)
         {
             GetCurrentUser().Following.Add(GetUser(username));
+            GetUser(username).Followers.Add(GetCurrentUser());
             return datacontext.SaveChanges() > 0;
         }
 

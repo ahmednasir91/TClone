@@ -78,6 +78,7 @@ var validationModule = function () {
             $('button.tweet-action').removeClass('disabled');
             $('#tweet-box-mini-home-profile').val('');
             effectsModule.clearBox();
+            if(tweet.isMine)
             effectsModule.alertMessage("Your Tweet was posted!", 1500);
             tweetViewModelObj.add(tweet);
         };
@@ -168,10 +169,26 @@ var validationModule = function () {
             });
         }
         function newTweet() {
-            $('.home-tweet-box .tweet-action').click(function () {
+            $('button#global-new-tweet-button').click(function (event) {
+                $('#global-tweet-dialog').show();
+                $('.modal-overlay').show();
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            $('.home-tweet-box .tweet-action').click(function (event) {
                 tweethub.add($('#tweet-box-mini-home-profile').val());
                 $('.tweet-form .spinner').css('display', 'inline-block');
                 $('button.tweet-action').addClass('disabled');
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            $('#global-tweet-dialog .tweet-action').click(function (event) {
+                tweethub.add($('#tweet-box-global').val());
+                $('#global-tweet-dialog').hide();
+                $('.modal-overlay').hide();
+                $('button.tweet-action').addClass('disabled');
+                event.preventDefault();
+                event.stopPropagation();
             });
         }
         function modalLists() {
@@ -285,6 +302,15 @@ var validationModule = function () {
             if ($('.home-tweet-box').length > 0) {
                 var tweetBoxViewModelObj = new tweetBoxViewModel();
                 ko.applyBindings(tweetBoxViewModelObj, $('.home-tweet-box').get(0));
+            }
+            if ($('#global-tweet-dialog').length > 0) {
+                var quickTweetBoxViewModel = new tweetBoxViewModel();
+                ko.applyBindings(quickTweetBoxViewModel, $('#global-tweet-dialog').get(0));
+                $('#tweet-box-global').click(function() {
+                    if ($(this).val() === defaultMessage) {
+                        $(this).val("");
+                    }
+                });
             }
         }
         function addSpinner(show) {
@@ -471,6 +497,9 @@ var validationModule = function () {
             });
             designEffects();
             userDropdown();
+            $('[data-nav="logout"]').click(function () {
+                window.location = '/Account/SignOut';
+            });
         }
         return {
             registrationForm: registrationForm,

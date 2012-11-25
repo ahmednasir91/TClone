@@ -171,9 +171,9 @@
     <Compile Include="Membership\CodeFirstRoleProvider.cs" />
     <Compile Include="Membership\Crypto.cs" />
     <Compile Include="Membership\WebSecurity.cs" />
-    <Compile Include="Migrations\201211251539591_Final.cs" />
-    <Compile Include="Migrations\201211251539591_Final.Designer.cs">
-      <DependentUpon>201211251539591_Final.cs</DependentUpon>
+    <Compile Include="Migrations\201211251843277_Final v1.2.cs" />
+    <Compile Include="Migrations\201211251843277_Final v1.2.Designer.cs">
+      <DependentUpon>201211251843277_Final v1.2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
